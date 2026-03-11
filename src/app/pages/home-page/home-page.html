@@ -1,4 +1,4 @@
-<p>home-page works!</p>
+<!-- <p>home-page works!</p>
 <div class="container">
     
 
@@ -20,12 +20,67 @@
             <button class="btn btn-primary " (click)="handleUserList()" >User List</button>
         </div>
 
-        <div>
-            <button class="btn btn-primary " (click)="handleShopList()" >Shop List</button>
-        </div>
-
     }
 
-  <!-- <app-debug-panel [form]="" /> -->
+  <app-debug-panel [form]="" />
+
+</div> -->
+
+
+<div class="home-page">
+
+    <div class="top-bar">
+        <button class="btn-logout" (click)="handlelogout()">Logout</button>
+    </div>
+
+    <div class="container main-container">
+
+        @if(this.authService.isLoggedIn()) {
+
+        <!-- TOKEN SECTION -->
+        <div class="token-section">
+
+            <h4 class="section-title">Authentication</h4>
+
+            <div class="token-box">
+                <p><strong>Token:</strong></p>
+                <div class="token-text">{{this.authService.getToken()}}</div>
+            </div>
+
+            <div class="token-box">
+                <p><strong>Refresh Token:</strong></p>
+                <div class="token-text">{{this.authService.getRefreshToken()}}</div>
+            </div>
+
+            <button class="btn-refresh" (click)="handleRefreshToken()">
+                Refresh Token
+            </button>
+
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- TABLE LIST SECTION -->
+        <div class="table-section">
+
+            <h4 class="section-title">List of Tables</h4>
+
+            <div class="table-list">
+
+                <button class="btn-table" (click)="handleAccessCountList()">
+                    AccessCount List
+                </button>
+
+                <button class="btn-table" (click)="handleUserList()">
+                    User List
+                </button>
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
 
 </div>
