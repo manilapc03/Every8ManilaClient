@@ -18,19 +18,20 @@ export class HomePage {
 
   //constructor(private authService: AuthService) {}
 
-  handlelogout() 
-  {
+  handlelogout() {
     this.authService.logout();
   }
-  
-  handleRefreshToken() 
-  {
+
+  handleRefreshToken() {
     this.authService.refreshToken();
   }
 
-  handleUserList () {
+  handleUserList() {
     this.router.navigateByUrl("/userlist")
+  }
 
+  handleAccessCountList() {
+    this.router.navigateByUrl("/accesscountlist")
   }
 
 }
