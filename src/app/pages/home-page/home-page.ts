@@ -34,4 +34,9 @@ export class HomePage {
     this.router.navigateByUrl("/accesscountlist")
   }
 
+  handleShopList(){
+    this.router.navigateByUrl("/shopList")
+  }
+  
+
 }

@@ -4,7 +4,7 @@ import { LoginPageComponent } from './pages/Login/login-page.component/login-pag
 import { HomePage } from './pages/home-page/home-page';
 import { NUserList } from './pages/N-User/n-user-list/n-user-list';
 import { NAccessCountList } from './pages/N-AccessCount/n-accesscount-list/n-accesscount-list';
-
+import { NShopList } from './pages/N-Shop/n-shop-list';
 
 export const routes: Routes = [
 
@@ -31,6 +31,11 @@ export const routes: Routes = [
     {
         path: 'accesscountlist',
         component: NAccessCountList,
+        //canActivate: [authGuard] 
+    },
+    {
+        path: 'shopList',
+        component: NShopList,
         //canActivate: [authGuard] 
     }
 
