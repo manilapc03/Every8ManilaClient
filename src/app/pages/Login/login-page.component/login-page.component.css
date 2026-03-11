@@ -1,0 +1,39 @@
+.authentication-card {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.authentication-card-container {
+  min-height: 100vh;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+
+/* Alert Styles for form messages */
+.alert {
+  gap: 0px;
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-md, 1rem);
+  margin-top: -5px;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius, 0.375rem);
+  grid-column: 2 / 3;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+

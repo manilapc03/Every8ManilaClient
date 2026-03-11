@@ -1,0 +1,55 @@
+<div class="container mt-5" style="max-width: 400px">
+  <h3 class="text-center mb-4">Login</h3>
+
+  <!-- (ngSubmit)="handlelogin()" -->
+
+  <!-- (submit)="onSubmit($event)" -->
+
+  <form autocomplete="on"  >
+    <div class="mb-3">
+      <label>Username</label>
+      <input type="text"
+             class="form-control"
+             [formField]="loginForm.username"
+             id="username"
+             placeholder="User Name" />
+    </div>
+    @if (loginForm.username().invalid() && loginForm.username().touched()) {
+    <div class="alert alert-danger">
+        @for (error of loginForm.username().errors(); track error.kind) {
+        <div>{{ error.message }}</div>
+        }
+    </div>    
+    } 
+
+    <div class="mb-3">
+      <label>Password</label>
+      <input type="password"
+             class="form-control"
+             [formField]="loginForm.password"
+             id="password" />
+    </div>
+
+    @if (loginForm.password().invalid() && loginForm.password().touched()) {
+    <div class="alert alert-danger">
+        @for (error of loginForm.password().errors(); track error.kind) {
+        <div>{{ error.message }}</div>
+        }
+    </div>    
+    } 
+
+    <button class="btn btn-primary w-100" (click)="handlelogin()" >Login</button>
+  </form>
+
+
+  <div class="text-center mt-3">
+    <a routerLink="/register">Don’t have an account? Register</a>
+  </div>
+
+  <app-social-login></app-social-login>
+
+</div>
+
+  <app-debug-panel [form]="loginForm()" />
+
+

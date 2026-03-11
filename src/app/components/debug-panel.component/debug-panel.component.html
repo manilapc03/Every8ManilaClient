@@ -1,0 +1,14 @@
+<div class="debug">
+  <h3>Debug Output</h3>
+  <div class="debug-section">
+    <strong>Form Value:</strong>
+    <pre>{{ formValue() | json }}</pre>
+  </div>
+  <div class="debug-section">
+    <strong>Form Valid:</strong>
+    <span [class.valid]="formValid()" [class.invalid]="!formValid()">
+      {{ formValid() }}
+    </span>
+  </div>
+</div>
+

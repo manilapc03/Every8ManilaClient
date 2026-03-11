@@ -1,0 +1,116 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="text-success text-center" style="font-size:30px">N-User</h5>
+                    <button style="width: 15%;" class="btn-primary" (click)="addHandler()">Add</button>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">UName</th>
+                                <th scope="col">Chihou</th>
+                                <th scope="col">Provider</th>
+                                <th scope="col">Last login</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @for (item of this.pageData(); track item.uid) {
+                                <tr>
+                                    <td>{{item.uid}}</td>
+                                    <td>{{item.email}}</td>
+                                    <td>{{item.uname}}</td>
+                                    <td>{{item.chihou_id}}</td>
+                                    <td>{{item.Provider}}</td>
+                                    <td>{{item.last_login}}</td>
+                                    <td>
+                                        <div class="btn-container cmd-btn">
+                                            <button class="edit-btn" (click)="editHandler(item.uid.toString())">Edit</button>
+                                            <button class="del-btn" (click)="deleteHandler(item.uid.toString())">Delete</button>                            
+                                        </div>
+                                    </td>
+                                </tr>
+                            } 
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-action p-2 page-card-div">
+
+                    <div class="rpp-div">
+                        <span class="rpp-text">Result per page</span>
+                        <select class="rpp-dropdown" [value]="selectedPagesize()" (change)="onChange($event)">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+
+                    <div class="page-div">
+                        <button class="btn-page btn-primary" (click)="prevPage()" [disabled]="currentPage() === 1">
+                            Previous
+                        </button>
+                        <span class="text-danger span-page-text">Page {{currentPage()}} of {{this.userService.dataList().totalPages}}</span>
+                        <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.userService.dataList().totalPages">
+                            Next
+                        </button>
+                    </div>
+
+                    <div class="page-input-div">
+                        <span class="span-page-go">Page</span>
+                        <input class="go-page-input" type="number" [value]="pageInput()" (input)="updateInputPage($any($event.target).value)" min="1"/>
+                        <button class="btn-go-page btn-primary" (click)="getPage()" [disabled]="currentPage() === this.userService.dataList().totalPages">
+                            Go
+                        </button>
+                    </div>
+
+                </div>
+
+
+
+                <!-- <div class="card-action p-2 page-card-div">
+                    <div class="page-div mt-3">
+                        <button class="btn-page btn-primary" (click)="prevPage()" [disabled]="currentPage() === 1">
+                            Previous
+                        </button>
+                        <span class="text-danger">{{this.currentPage()}}/{{this.userService.dataList().totalPages}}</span>
+                        <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.userService.dataList().totalPages">
+                            Next
+                        </button>
+
+                        <span class="span-page-go">Page </span>
+                        <input type="number" name="" id="" class="go-page-input">
+                        <button class="btn-go-page btn-primary" (click)="goToPage(2)" [disabled]="currentPage() === this.userService.dataList().totalPages">
+                            Go
+                        </button>
+
+                        <span class="rpp-text">Pagesize</span>
+                        <select class="rpp-dropdown" [value]="selectedPagesize()" (change)="onChange($event)">                            
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                </div> -->
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
