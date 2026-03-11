@@ -32,9 +32,9 @@ export interface NUsersModel {
     open_id_type: number;
     mail_login_pass: string;
 
-    HashPassword: string;
-    Provider: string;
-    RefreshToken: string;
-    RefreshTokenExpiryTime: Date;
+    hashPassword: string;
+    provider: string;
+    refreshToken: string;
+    refreshTokenExpiryTime: Date;
 
 }

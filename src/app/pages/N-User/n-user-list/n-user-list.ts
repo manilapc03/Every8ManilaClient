@@ -21,6 +21,7 @@ export class NUserList implements OnInit {
   currentPage = signal<number>(1);
 
   pageData = computed(() => {
+    console.log(this.userService.dataList().data);
     return this.userService.dataList().data
   });
 
