@@ -34,10 +34,30 @@ export class NUserClient {
     );
   }
 
+  public deleteUserById(id: number)
+  {
+    return this.http.delete(
+      environment.apiUrl+`/api/N_Users/delete?id=${id}`
+    );
+  }
+
+  public createUser(model: NUsersModel)
+  {
+    return this.http.post(
+      environment.apiUrl+`/api/N_Users/create`, model);
+  }
+
+  public updateUser(model: NUsersModel)
+  {
+    return this.http.put(
+      environment.apiUrl+`/api/N_Users/update`, model);
+  }
+
+
   // GET: https://localhost:7215/api/N_Users/GetByIdUser/1
+  //DELETE: https://localhost:7215/api/N_Users/delete?id=1
   // POST:https://localhost:7215/api/N_Users/create
   // PUT: https://localhost:7215/api/N_Users/update
-  //DELETE: https://localhost:7215/api/N_Users/delete?id=1
 
 
 }

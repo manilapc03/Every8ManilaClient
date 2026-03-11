@@ -62,44 +62,31 @@ export class NUserServiceAPI {
             }); 
     }
 
-
-
-  // private handleSuccessUserList(resp: ResponseData<NUsersModel>) //: Observable<ResponseData<NUsersModel>>
-  // {  
-  //   this._dataList.set(resp);
-  // }    
-
-    /*
-    console.log(respData);
-
-    let _currentPage = respData.currentPage;
-    let _totalPages = respData.totalPages;
-    let _pageSize = respData.pageSize;
-    let _totalCount = respData.totalCount;
-    let _status = respData.status;
-    let _message = respData.message;
-    let _hasPrevious = respData.hasPrevious;
-    let _hasNext = respData.hasNext;
-
-    console.log("_currentPage="+_currentPage);
-    console.log("_totalPages="+_totalPages);
-    console.log("_pageSize="+_pageSize);
-    console.log("_totalCount="+_totalCount);
-    console.log("_status="+_status);
-    console.log("_message="+_message);
-    console.log("_hasPrevious="+_hasPrevious);
-    console.log("_hasNext="+_hasNext);
-
-    let data = respData.data;
-    for (let index = 0; index < data.length; index++) {
-        const element = data[index];    
-        let userdata = element;
-        console.log(userdata);   
-        
-        //userdata.uid;
+    public deleteUserById(id: number) {
+      this.userClient.deleteUserById(id)
+            .subscribe({
+                error: (err) => alert("Unabled to delete record with id "+id.toString() +":"+err.error),
+                complete: () => alert(id.toString() + " has been deleted."),
+            }); 
     }
-    */
-  
+
+    public createUser(model: NUsersModel) {
+      this.userClient.createUser(model)  
+            .subscribe({
+                error: (err) => alert("Unabled to save record : "+err.error),
+                complete: () => alert(" User has been created."),
+            }); 
+
+    }
+
+    public updateUser(model: NUsersModel) {
+      this.userClient.updateUser(model)  
+            .subscribe({
+                error: (err) => alert("Unabled to save record : "+err.error),
+                complete: () => alert(" User has been updated."),
+            }); 
+
+    }
 
 
 }
