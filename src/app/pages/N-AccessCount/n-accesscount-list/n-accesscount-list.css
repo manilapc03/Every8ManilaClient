@@ -1,0 +1,313 @@
+ body {
+     margin: 0;
+     height: 100vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     font-family: Arial, sans-serif;
+     background-color: #f2f4f7;
+ }
+
+
+ /* removed
+ .form-container { */
+ /* width: 90%;
+   padding: 15px;
+   background: #fff;
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   margin: 0 0 5% 5%; */
+ /* } */
+
+ .card {
+     overflow-x: auto;
+ }
+
+ .card-body {
+     margin-bottom: 0px;
+     padding-bottom: 0px;
+ }
+
+ h2 {
+     text-align: center;
+     font-size: 18px;
+     margin-bottom: 15px;
+ }
+
+ label {
+     font-size: 13px;
+     font-weight: bold;
+     margin-bottom: 4px;
+     display: block;
+ }
+
+ input,
+ select,
+ textarea {
+     width: 90%;
+     padding: 8px;
+     margin-bottom: 10px;
+     font-size: 13px;
+     border-radius: 4px;
+     border: 1px solid #ccc;
+ }
+
+ textarea {
+     resize: none;
+ }
+
+ button {
+     width: 100%;
+     padding: 8px;
+     font-size: 14px;
+     background-color: #007bff;
+     border: none;
+     color: white;
+     border-radius: 4px;
+     cursor: pointer;
+ }
+
+ .add-user-btn {
+     width: 12%;
+     border-radius: 7px;
+ }
+
+ button:hover {
+     background-color: #0056b3;
+ }
+
+ .errormessage {
+     color: red;
+     font-size: 12px;
+     margin: 0 0 10px 0;
+     padding: 0;
+     list-style-type: none;
+ }
+
+
+
+ /* ----------------  */
+ /* TABLE SECTION */
+ /* ----------------  */
+
+ table {
+     width: 100%;
+     margin-top: 20px;
+     border: 1px solid #ddd;
+     border-radius: 12px;
+     border-collapse: separate;
+     border-spacing: 0;
+     overflow: hidden;
+ }
+
+ tbody {
+     display: block;
+     max-height: 590px;
+     overflow-y: scroll;
+ }
+
+ /* make tbody rows behave like table rows */
+ tbody tr {
+     display: table;
+     width: 100%;
+     table-layout: fixed;
+ }
+
+ /* Scrollbar design */
+ tbody::-webkit-scrollbar {
+     width: 10px;
+ }
+
+ tbody::-webkit-scrollbar-track {
+     background: #f1f1f1;
+     border-radius: 10px;
+ }
+
+ tbody::-webkit-scrollbar-thumb {
+     background: #c1c1c1;
+     border-radius: 10px;
+ }
+
+ tbody::-webkit-scrollbar-thumb:hover {
+     background: #a8a8a8;
+ }
+
+ /* keep header fixed */
+ thead {
+     display: table;
+     width: 100%;
+     table-layout: fixed;
+ }
+
+ tr:first {
+     border-radius: 12px;
+ }
+
+ th,
+ td {
+     padding: 10px;
+     text-align: left;
+     /* border-bottom: 1px solid #ddd; */
+     font-size: 13px;
+     vertical-align: middle;
+ }
+
+ th {
+     background-color: #4784BF;
+     color: white;
+     border: none;
+ }
+
+ th:first-child {
+     border-top-left-radius: 12px;
+ }
+
+ th:last-child {
+     border-top-right-radius: 12px;
+ }
+
+ tr:nth-child(even) td {
+     background-color: #f4f4f4;
+ }
+
+ .cmd-btn {
+     justify-content: center;
+ }
+
+ .edit-btn {
+     background-color: #17a2b8;
+     color: white;
+     border: none;
+     padding: 5px 10px;
+     border-radius: 7px;
+     cursor: pointer;
+     min-width: 70px;
+     max-width: 25%;
+ }
+
+ .edit-btn:hover {
+     background-color: #127c8d;
+ }
+
+ .del-btn {
+     background-color: #dc3545;
+     color: white;
+     border: none;
+     /* padding: 5px 10px; */
+     border-radius: 7px;
+     cursor: pointer;
+     min-width: 80px;
+     max-width: 25%;
+ }
+
+ .del-btn:hover {
+     background-color: #b52c39;
+ }
+
+
+
+ /* ----------------  */
+ /* PAGE SECTION */
+ /* ----------------  */
+
+ /* PAGE DROPDOWN SECTION */
+
+ .page-card-div {
+     display: flex;
+     /* flex-direction: column; */
+     justify-content: center;
+     align-items: center;
+     /* vertical center */
+     margin-bottom: 10px;
+     gap: 30px;
+ }
+
+ .rpp-div {
+     display: flex;
+     align-items: center;
+ }
+
+ .rpp-text {
+     margin-left: 8px;
+     margin-right: 10px;
+ }
+
+ .rpp-dropdown {
+     width: 55px;
+     padding: 5px;
+     font-size: 13px;
+     border-radius: 4px;
+     border: 1px solid #ccc;
+
+     margin: 0;
+     /* remove default margins */
+     height: 28px;
+     /* match height with other controls */
+     box-sizing: border-box;
+ }
+
+ .page-div {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-top: 0px;
+ }
+
+ /* Remove arrows in Chrome, Edge, Safari */
+ .go-page-input::-webkit-outer-spin-button,
+ .go-page-input::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+ }
+
+ /* Remove arrows in Firefox */
+ .go-page-input {
+     -moz-appearance: textfield;
+ }
+
+ .span-page-text {
+     min-width: 150px;
+     text-align: center;
+ }
+
+ .btn-page {
+     min-width: 80px;
+     max-width: 7%;
+     border-radius: 7px;
+ }
+
+ .btn-page:disabled {
+     background-color: #3278c4;
+     cursor: not-allowed;
+ }
+
+ .page-input-div {
+     display: flex;
+     align-items: center;
+ }
+
+ .span-page-go {
+     margin: 0px 10px;
+ }
+
+ .go-page-input {
+     width: 55px;
+     padding: 6px;
+     margin-bottom: 0;
+     font-size: 12px;
+     border-radius: 4px;
+     border: 1px solid #ccc;
+     margin-right: 15px;
+ }
+
+ .btn-go-page {
+     min-width: 50px;
+     max-width: 7%;
+     border-radius: 7px;
+     padding: 6px;
+ }
+
+ .btn-container {
+     display: flex;
+     gap: 10px;
+ }
