@@ -27,6 +27,11 @@ export const routes: Routes = [
         path: 'userlist',
         component: NUserList,
         //canActivate: [authGuard] 
+    },
+    {
+        path: 'accesscountlist',
+        component: NAccessCountList,
+        //canActivate: [authGuard] 
     }
 
     //4,{ path: '**', component: Notfound }
