@@ -21,7 +21,7 @@
                         </thead>
 
                         <tbody>
-                            @for (item of this.pageData(); track item.uid) {
+                            @for (item of this.pageDataList(); track item.uid) {
                                 <tr>
                                     <td>{{item.uid}}</td>
                                     <td>{{item.email}}</td>
@@ -31,8 +31,8 @@
                                     <td>{{item.last_login}}</td>
                                     <td>
                                         <div class="btn-container cmd-btn">
-                                            <button class="edit-btn" (click)="editHandler(item.uid.toString())">Edit</button>
-                                            <button class="del-btn" (click)="deleteHandler(item.uid.toString())">Delete</button>                            
+                                            <button class="edit-btn" (click)="editHandler(item.uid)">Edit</button>
+                                            <button class="del-btn" (click)="deleteHandler(item.uid)">Delete</button>                            
                                         </div>
                                     </td>
                                 </tr>

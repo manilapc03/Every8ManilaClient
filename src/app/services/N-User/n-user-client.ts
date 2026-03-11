@@ -20,25 +20,24 @@ import { ResponseData } from '../../shared/response-data';
 export class NUserClient {
   private http = inject(HttpClient);
 
-  // NUsersModel
-  //n_userlist = signal<any[]>([]);
-
-  /// https://localhost:7215/api/N_Users/GetAllUsers
-
-  ///   https://localhost:7215/api/N_Users/GetAllUsers?PageNumber=2&PageSize=10
-
-  // : Observable<any[]> 
-  //    environment.apiUrl + '/api/N_Users/GetAllUsers?PageNumber=${pageNumber}&PageSize=${pageSize}',
-
   public getUserList(pageNumber: number, pageSize: number )
   {
-    //  '${environment.apiUrl}/api/N_Users/GetAllUsers?PageNumber=${pageNumber}&PageSize=${pageSize}'
-
     return this.http.get<ResponseData<NUsersModel>>(
       environment.apiUrl+`/api/N_Users/GetAllUsers?PageNumber=${pageNumber}&PageSize=${pageSize}`
     );
   }
 
+  public getUserById(id: number)
+  {
+    return this.http.get<ResponseData<NUsersModel>>(
+      environment.apiUrl+`/api/N_Users/GetByIdUser?id=${id}`
+    );
+  }
+
+  // GET: https://localhost:7215/api/N_Users/GetByIdUser/1
+  // POST:https://localhost:7215/api/N_Users/create
+  // PUT: https://localhost:7215/api/N_Users/update
+  //DELETE: https://localhost:7215/api/N_Users/delete?id=1
 
 
 }

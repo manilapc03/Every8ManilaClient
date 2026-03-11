@@ -20,9 +20,14 @@ export class NUserList implements OnInit {
   pageSize = signal<number>(10);;
   currentPage = signal<number>(1);
 
-  pageData = computed(() => {
-    console.log(this.userService.dataList().data);
+  pageDataList = computed(() => {
+    //console.log(this.userService.dataList().data);
     return this.userService.dataList().data
+  });
+
+  pageData = computed(() => {
+    //console.log(this.userService.data().data);
+    return this.userService.data().data
   });
 
  onChange(event: Event) {
@@ -54,8 +59,8 @@ export class NUserList implements OnInit {
 
   updatePage() { 
     try {
-      this.userService.userList(this.currentPage(),this.pageSize()).unsubscribe();
-      this.userService.userList(this.currentPage(),this.pageSize());
+      this.userService.getUserList(this.currentPage(),this.pageSize()).unsubscribe();
+      this.userService.getUserList(this.currentPage(),this.pageSize());
 
       //this.totalPage.set(this.userService.dataList().totalPages);
     } catch (error) {
@@ -69,7 +74,7 @@ export class NUserList implements OnInit {
 
   ngOnInit() {
     this.currentPage.set(1);
-    this.userService.userList(this.currentPage(),this.pageSize());
+    this.userService.getUserList(this.currentPage(),this.pageSize());
     this.updatePage();
   }
 
@@ -93,22 +98,29 @@ export class NUserList implements OnInit {
 
   }
 
-  editHandler(id: string) {
-    alert("editHandler:"+id);
+  editHandler(id: number) {
+    //alert("editHandler:"+id);
+
+    this.userService.getUserById(id).unsubscribe();
+    this.userService.getUserById(id);
+
+
     //this.router.navigate(['/editemployee', id]);
   }
 
-  deleteHandler(id: string) {
-    alert("deleteHandler:"+id);
+  deleteHandler(id: number) {
+    //alert("deleteHandler:"+id);
 
-    // if(confirm('Are you sure to delete this employee?')) {
-    //   this.userService.deleteEmployee(id).subscribe(() => {
-    //     // Refresh the list after deletion
-    //     this.api.GetallEmployee().subscribe(items => {
-    //       this.emplist.set(items);
-    //     });
-    //   });
-    // }
+    if(confirm('Are you sure to delete this User?')) {
+
+      // this.userService.deleteEmployee(id).subscribe(() => {
+      //   // Refresh the list after deletion
+      //   this.api.GetallEmployee().subscribe(items => {
+      //     this.emplist.set(items);
+      //   });
+      // });
+
+    }
 
   }
 

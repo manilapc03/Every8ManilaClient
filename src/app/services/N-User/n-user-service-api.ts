@@ -25,10 +25,22 @@ export class NUserServiceAPI {
       totalPages: 0,
     });
 
-    public userList(pageNumber: number, pageSize: number) 
+    data = signal<ResponseData<NUsersModel>>({
+      data: [],
+      currentPage: 0,
+      hasNext : false,
+      hasPrevious: false,
+      message: "",
+      status: "",
+      pageSize: 10,
+      totalCount: 0,
+      totalPages: 0,
+    });
+
+    public getUserList(pageNumber: number, pageSize: number) 
     {
        return this.userClient.getUserList(pageNumber, pageSize)
-            .pipe(delay(1000))
+            //.pipe(delay(1000))
             .subscribe({
                 next: (resp: ResponseData<NUsersModel>) => {
                         this.dataList.set(resp);
@@ -37,6 +49,19 @@ export class NUserServiceAPI {
                 complete: () => console.log('Done.'),
             }); 
     }
+
+    public getUserById(id: number) {
+       return this.userClient.getUserById(id)
+            //.pipe(delay(1000))
+            .subscribe({
+                next: (resp: ResponseData<NUsersModel>) => {
+                        this.data.set(resp);
+                      },                
+                error: (err) => console.log(err.error),
+                complete: () => console.log('Done.'),
+            }); 
+    }
+
 
 
   // private handleSuccessUserList(resp: ResponseData<NUsersModel>) //: Observable<ResponseData<NUsersModel>>
