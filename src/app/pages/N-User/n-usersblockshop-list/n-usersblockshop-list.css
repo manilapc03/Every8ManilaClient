@@ -1,313 +1,279 @@
- body {
-     margin: 0;
-     height: 100vh;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     font-family: Arial, sans-serif;
-     background-color: #f2f4f7;
- }
+/* ----------------  */
+/* TABLE SECTION     */
+/* ----------------  */
 
+.card {
+    overflow-x: auto;
+}
 
- /* removed
- .form-container { */
- /* width: 90%;
-   padding: 15px;
-   background: #fff;
-   border-radius: 8px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   margin: 0 0 5% 5%; */
- /* } */
+.card-body {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
 
- .card {
-     overflow-x: auto;
- }
+h2 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
 
- .card-body {
-     margin-bottom: 0px;
-     padding-bottom: 0px;
- }
+label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: block;
+}
 
- h2 {
-     text-align: center;
-     font-size: 18px;
-     margin-bottom: 15px;
- }
+input,
+select,
+textarea {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
 
- label {
-     font-size: 13px;
-     font-weight: bold;
-     margin-bottom: 4px;
-     display: block;
- }
+textarea {
+    resize: none;
+}
 
- input,
- select,
- textarea {
-     width: 90%;
-     padding: 8px;
-     margin-bottom: 10px;
-     font-size: 13px;
-     border-radius: 4px;
-     border: 1px solid #ccc;
- }
+button {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
- textarea {
-     resize: none;
- }
+.add-user-btn {
+    width: 12%;
+    border-radius: 7px;
+}
 
- button {
-     width: 100%;
-     padding: 8px;
-     font-size: 14px;
-     background-color: #007bff;
-     border: none;
-     color: white;
-     border-radius: 4px;
-     cursor: pointer;
- }
+button:hover {
+    background-color: #0056b3;
+}
 
- .add-user-btn {
-     width: 12%;
-     border-radius: 7px;
- }
+.errormessage {
+    color: red;
+    font-size: 12px;
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style-type: none;
+}
 
- button:hover {
-     background-color: #0056b3;
- }
+table {
+    width: 100%;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
 
- .errormessage {
-     color: red;
-     font-size: 12px;
-     margin: 0 0 10px 0;
-     padding: 0;
-     list-style-type: none;
- }
+tbody {
+    display: block;
+    max-height: 590px;
+    overflow-y: scroll;
+}
 
+/* make tbody rows behave like table rows */
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
 
+/* Scrollbar design */
+tbody::-webkit-scrollbar {
+    width: 10px;
+}
 
- /* ----------------  */
- /* TABLE SECTION */
- /* ----------------  */
+tbody::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
 
- table {
-     width: 100%;
-     margin-top: 20px;
-     border: 1px solid #ddd;
-     border-radius: 12px;
-     border-collapse: separate;
-     border-spacing: 0;
-     overflow: hidden;
- }
+tbody::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
 
- tbody {
-     display: block;
-     max-height: 590px;
-     overflow-y: scroll;
- }
+tbody::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
 
- /* make tbody rows behave like table rows */
- tbody tr {
-     display: table;
-     width: 100%;
-     table-layout: fixed;
- }
+/* keep header fixed */
+thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
 
- /* Scrollbar design */
- tbody::-webkit-scrollbar {
-     width: 10px;
- }
+tr:first-child {
+    border-radius: 12px;
+}
 
- tbody::-webkit-scrollbar-track {
-     background: #f1f1f1;
-     border-radius: 10px;
- }
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    font-size: 13px;
+    vertical-align: middle;
+}
 
- tbody::-webkit-scrollbar-thumb {
-     background: #c1c1c1;
-     border-radius: 10px;
- }
+th {
+    background-color: #4784BF;
+    color: white;
+    border: none;
+}
 
- tbody::-webkit-scrollbar-thumb:hover {
-     background: #a8a8a8;
- }
+th:first-child {
+    border-top-left-radius: 12px;
+}
 
- /* keep header fixed */
- thead {
-     display: table;
-     width: 100%;
-     table-layout: fixed;
- }
+th:last-child {
+    border-top-right-radius: 12px;
+}
 
- tr:first {
-     border-radius: 12px;
- }
+tr:nth-child(even) td {
+    background-color: #f4f4f4;
+}
 
- th,
- td {
-     padding: 10px;
-     text-align: left;
-     /* border-bottom: 1px solid #ddd; */
-     font-size: 13px;
-     vertical-align: middle;
- }
+.cmd-btn {
+    justify-content: center;
+}
 
- th {
-     background-color: #4784BF;
-     color: white;
-     border: none;
- }
+.edit-btn {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    min-width: 70px;
+    max-width: 25%;
+}
 
- th:first-child {
-     border-top-left-radius: 12px;
- }
+.edit-btn:hover {
+    background-color: #127c8d;
+}
 
- th:last-child {
-     border-top-right-radius: 12px;
- }
+.del-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    min-width: 80px;
+    max-width: 25%;
+}
 
- tr:nth-child(even) td {
-     background-color: #f4f4f4;
- }
+.del-btn:hover {
+    background-color: #b52c39;
+}
 
- .cmd-btn {
-     justify-content: center;
- }
+/* ----------------  */
+/* PAGE SECTION      */
+/* ----------------  */
 
- .edit-btn {
-     background-color: #17a2b8;
-     color: white;
-     border: none;
-     padding: 5px 10px;
-     border-radius: 7px;
-     cursor: pointer;
-     min-width: 70px;
-     max-width: 25%;
- }
+.page-card-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 30px;
+}
 
- .edit-btn:hover {
-     background-color: #127c8d;
- }
+.rpp-div {
+    display: flex;
+    align-items: center;
+}
 
- .del-btn {
-     background-color: #dc3545;
-     color: white;
-     border: none;
-     /* padding: 5px 10px; */
-     border-radius: 7px;
-     cursor: pointer;
-     min-width: 80px;
-     max-width: 25%;
- }
+.rpp-text {
+    margin-left: 8px;
+    margin-right: 10px;
+}
 
- .del-btn:hover {
-     background-color: #b52c39;
- }
+.rpp-dropdown {
+    width: 55px;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin: 0;
+    height: 28px;
+    box-sizing: border-box;
+}
 
+.page-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+}
 
+/* Remove arrows in Chrome, Edge, Safari */
+.go-page-input::-webkit-outer-spin-button,
+.go-page-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
- /* ----------------  */
- /* PAGE SECTION */
- /* ----------------  */
+/* Remove arrows in Firefox */
+.go-page-input {
+    -moz-appearance: textfield;
+}
 
- /* PAGE DROPDOWN SECTION */
+.span-page-text {
+    min-width: 150px;
+    text-align: center;
+}
 
- .page-card-div {
-     display: flex;
-     /* flex-direction: column; */
-     justify-content: center;
-     align-items: center;
-     /* vertical center */
-     margin-bottom: 10px;
-     gap: 30px;
- }
+.btn-page {
+    min-width: 80px;
+    max-width: 7%;
+    border-radius: 7px;
+}
 
- .rpp-div {
-     display: flex;
-     align-items: center;
- }
+.btn-page:disabled {
+    background-color: #3278c4;
+    cursor: not-allowed;
+}
 
- .rpp-text {
-     margin-left: 8px;
-     margin-right: 10px;
- }
+.page-input-div {
+    display: flex;
+    align-items: center;
+}
 
- .rpp-dropdown {
-     width: 55px;
-     padding: 5px;
-     font-size: 13px;
-     border-radius: 4px;
-     border: 1px solid #ccc;
+.span-page-go {
+    margin: 0px 10px;
+}
 
-     margin: 0;
-     /* remove default margins */
-     height: 28px;
-     /* match height with other controls */
-     box-sizing: border-box;
- }
+.go-page-input {
+    width: 55px;
+    padding: 6px;
+    margin-bottom: 0;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 15px;
+}
 
- .page-div {
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     margin-top: 0px;
- }
+.btn-go-page {
+    min-width: 50px;
+    max-width: 7%;
+    border-radius: 7px;
+    padding: 6px;
+}
 
- /* Remove arrows in Chrome, Edge, Safari */
- .go-page-input::-webkit-outer-spin-button,
- .go-page-input::-webkit-inner-spin-button {
-     -webkit-appearance: none;
-     margin: 0;
- }
-
- /* Remove arrows in Firefox */
- /* .go-page-input {
-     -moz-appearance: textfield;
- } */
-
- .span-page-text {
-     min-width: 150px;
-     text-align: center;
- }
-
- .btn-page {
-     min-width: 80px;
-     max-width: 7%;
-     border-radius: 7px;
- }
-
- .btn-page:disabled {
-     background-color: #3278c4;
-     cursor: not-allowed;
- }
-
- .page-input-div {
-     display: flex;
-     align-items: center;
- }
-
- .span-page-go {
-     margin: 0px 10px;
- }
-
- .go-page-input {
-     width: 55px;
-     padding: 6px;
-     margin-bottom: 0;
-     font-size: 12px;
-     border-radius: 4px;
-     border: 1px solid #ccc;
-     margin-right: 15px;
- }
-
- .btn-go-page {
-     min-width: 50px;
-     max-width: 7%;
-     border-radius: 7px;
-     padding: 6px;
- }
-
- .btn-container {
-     display: flex;
-     gap: 10px;
- }
+.btn-container {
+    display: flex;
+    gap: 10px;
+}
