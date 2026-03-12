@@ -26,17 +26,20 @@ export class HomePage {
     this.authService.refreshToken();
   }
 
-  handleUserList() {
-    this.router.navigateByUrl("/userlist")
-  }
-
   handleAccessCountList() {
     this.router.navigateByUrl("/accesscountlist")
   }
 
-  handleShopList(){
+  handleShopList() {
     this.router.navigateByUrl("/shopList")
   }
-  
+
+  handleUserList() {
+    this.router.navigateByUrl("/userlist")
+  }
+
+  handleUsersBlockShopList() {
+    this.router.navigateByUrl("/usersblockshoplist")
+  }
 
 }
