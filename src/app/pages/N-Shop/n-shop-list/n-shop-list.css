@@ -1,0 +1,423 @@
+/* Note: I removed your Table's 'body' CSS rule because it used flex centering, 
+   which would crush your new Dashboard layout into the middle of the screen! */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f4f7;
+}
+
+/* ----------------  */
+/* DASHBOARD LAYOUT  */
+/* ----------------  */
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px;
+  background: #f3f4f6;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+/* rotate arrow when open */
+.arrow.open {
+  transform: rotate(90deg);
+}
+
+/* Logo */
+.sidebar-logo {
+  width: 100%;
+  padding: 5px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sb-logo {
+  width: 150px;
+}
+
+/* Groups */
+.sidebar-group {
+  margin-top: 10px;
+}
+
+/* Main item */
+.sidebar-item {
+  padding: 12px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #333;
+}
+
+.sidebar-item:hover {
+  background: #e7e7e7;
+}
+
+/* Submenu */
+.sidebar-submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sub items */
+.sidebar-link {
+  padding: 10px 40px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #444;
+}
+
+.sidebar-link:hover {
+  background: #eeeeee;
+}
+
+.sidebar-active {
+  background: #e7e7e7;
+  font-weight: 600;
+  cursor: auto;
+}
+
+.sidebar-active:hover {
+  background: #e7e7e7;
+  cursor: auto;
+}
+
+/* MAIN AREA */
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP NAVBAR */
+.top-navbar {
+  height: 60px;
+  background: #4784BF;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+}
+
+/* Logout */
+.btn-logout {
+  background: white;
+  color: #4784BF;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.btn-logout:hover {
+  background: #f2f2f2;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  background: #f4f6f9;
+  /* padding: 30px; */
+  padding-top: 20px;
+  overflow-y: auto;
+  /* Added this so your main content scrolls if the table is too long */
+}
+
+/* ----------------  */
+/* TABLE SECTION     */
+/* ----------------  */
+
+.card {
+  overflow-x: auto;
+}
+
+.card-body {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  display: block;
+}
+
+input,
+select,
+textarea {
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-user-btn {
+  width: 12%;
+  border-radius: 7px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.errormessage {
+  color: red;
+  font-size: 12px;
+  margin: 0 0 10px 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+tbody {
+  display: block;
+  max-height: 590px;
+  overflow-y: scroll;
+}
+
+/* make tbody rows behave like table rows */
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Scrollbar design */
+tbody::-webkit-scrollbar {
+  width: 10px;
+}
+
+tbody::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+tbody::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+tbody::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* keep header fixed */
+thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+tr:first-child {
+  border-radius: 12px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+th {
+  background-color: #4784BF;
+  color: white;
+  border: none;
+}
+
+th:first-child {
+  border-top-left-radius: 12px;
+}
+
+th:last-child {
+  border-top-right-radius: 12px;
+}
+
+tr:nth-child(even) td {
+  background-color: #f4f4f4;
+}
+
+.cmd-btn {
+  justify-content: center;
+}
+
+.edit-btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  min-width: 70px;
+  max-width: 25%;
+}
+
+.edit-btn:hover {
+  background-color: #127c8d;
+}
+
+.del-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  min-width: 80px;
+  max-width: 25%;
+}
+
+.del-btn:hover {
+  background-color: #b52c39;
+}
+
+/* ----------------  */
+/* PAGE SECTION      */
+/* ----------------  */
+
+.page-card-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 30px;
+}
+
+.rpp-div {
+  display: flex;
+  align-items: center;
+}
+
+.rpp-text {
+  margin-left: 8px;
+  margin-right: 10px;
+}
+
+.rpp-dropdown {
+  width: 55px;
+  padding: 5px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin: 0;
+  height: 28px;
+  box-sizing: border-box;
+}
+
+.page-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+/* Remove arrows in Chrome, Edge, Safari */
+.go-page-input::-webkit-outer-spin-button,
+.go-page-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove arrows in Firefox */
+.go-page-input {
+  -moz-appearance: textfield;
+}
+
+.span-page-text {
+  min-width: 150px;
+  text-align: center;
+}
+
+.btn-page {
+  min-width: 80px;
+  max-width: 7%;
+  border-radius: 7px;
+}
+
+.btn-page:disabled {
+  background-color: #3278c4;
+  cursor: not-allowed;
+}
+
+.page-input-div {
+  display: flex;
+  align-items: center;
+}
+
+.span-page-go {
+  margin: 0px 10px;
+}
+
+.go-page-input {
+  width: 55px;
+  padding: 6px;
+  margin-bottom: 0;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 15px;
+}
+
+.btn-go-page {
+  min-width: 50px;
+  max-width: 7%;
+  border-radius: 7px;
+  padding: 6px;
+}
+
+.btn-container {
+  display: flex;
+  gap: 10px;
+}
