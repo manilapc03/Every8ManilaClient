@@ -3,6 +3,9 @@ import { NUserServiceAPI } from '../../../services/N-User/n-user-service-api';
 import { ResponseData } from '../../../shared/response-data';
 import { NUsersModel } from '../../../model/N-User/n-users.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/Auth/auth-service';
+
 
 @Component({
   selector: 'app-n-user-list',
@@ -11,6 +14,11 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './n-user-list.css',
 })
 export class NUserList implements OnInit {
+
+  showTables = true;
+  router = inject(Router);
+
+  authService = inject(AuthService);
 
   userService = inject(NUserServiceAPI);
 
@@ -30,7 +38,7 @@ export class NUserList implements OnInit {
     return this.userService.data().data
   });
 
- onChange(event: Event) {
+  onChange(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
     this.selectedPagesize.set(value);
 
@@ -44,8 +52,8 @@ export class NUserList implements OnInit {
     this.pageInput.set(Number(value));
   }
 
-  
-  getPage() {    
+
+  getPage() {
     this.gotoPage(this.pageInput());
   }
 
@@ -57,44 +65,44 @@ export class NUserList implements OnInit {
     this.updatePage();
   }
 
-  updatePage() { 
+  updatePage() {
     try {
-      this.userService.getUserList(this.currentPage(),this.pageSize()).unsubscribe();
-      this.userService.getUserList(this.currentPage(),this.pageSize());
+      this.userService.getUserList(this.currentPage(), this.pageSize()).unsubscribe();
+      this.userService.getUserList(this.currentPage(), this.pageSize());
 
       //this.totalPage.set(this.userService.dataList().totalPages);
     } catch (error) {
       // Code to handle the error
     } finally {
       //
-       //alert("updatePage()");
+      //alert("updatePage()");
     }
 
   }
 
   ngOnInit() {
     this.currentPage.set(1);
-    this.userService.getUserList(this.currentPage(),this.pageSize());
+    this.userService.getUserList(this.currentPage(), this.pageSize());
     this.updatePage();
   }
 
-  nextPage(){
-    if(this.currentPage() < this.userService.dataList().totalPages){
-       this.currentPage.update(currentValue => currentValue + 1);
+  nextPage() {
+    if (this.currentPage() < this.userService.dataList().totalPages) {
+      this.currentPage.update(currentValue => currentValue + 1);
 
-       this.updatePage();
+      this.updatePage();
     }
   }
 
-  prevPage(){
-     if(this.currentPage() > 1){
-       this.currentPage.update(currentValue => currentValue - 1);
+  prevPage() {
+    if (this.currentPage() > 1) {
+      this.currentPage.update(currentValue => currentValue - 1);
       this.updatePage();
-     }
+    }
   }
 
 
-  addHandler(){
+  addHandler() {
 
   }
 
@@ -111,7 +119,7 @@ export class NUserList implements OnInit {
   deleteHandler(id: number) {
     //alert("deleteHandler:"+id);
 
-    if(confirm('Are you sure to delete this User?')) {
+    if (confirm('Are you sure to delete this User?')) {
       this.userService.deleteUserById(id);
 
       // this.userService.deleteEmployee(id).subscribe(() => {
@@ -125,6 +133,33 @@ export class NUserList implements OnInit {
 
   }
 
+  handlelogout() {
+    this.authService.logout();
+  }
+
+  handleRefreshToken() {
+    this.authService.refreshToken();
+  }
+
+  handleHomePage() {
+    this.router.navigateByUrl("/")
+  }
+
+  handleAccessCountList() {
+    this.router.navigateByUrl("/accesscountlist")
+  }
+
+  handleShopList() {
+    this.router.navigateByUrl("/shopList")
+  }
+
+  handleUserList() {
+    this.router.navigateByUrl("/userlist")
+  }
+
+  handleUsersBlockShopList() {
+    this.router.navigateByUrl("/usersblockshoplist")
+  }
 
 
 }

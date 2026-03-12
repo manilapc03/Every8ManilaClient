@@ -1,313 +1,423 @@
- body {
-   margin: 0;
-   height: 100vh;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-family: Arial, sans-serif;
-   background-color: #f2f4f7;
- }
+/* Note: I removed your Table's 'body' CSS rule because it used flex centering, 
+   which would crush your new Dashboard layout into the middle of the screen! */
 
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f4f7;
+}
 
- /* removed
- .form-container { */
- /* width: 90%;
-   padding: 15px;
-   background: #fff;
-   border-radius: 8px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   margin: 0 0 5% 5%; */
- /* } */
+/* ----------------  */
+/* DASHBOARD LAYOUT  */
+/* ----------------  */
 
- .card {
-   overflow-x: auto;
- }
+.dashboard {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
 
- .card-body {
-   margin-bottom: 0px;
-   padding-bottom: 0px;
- }
+/* SIDEBAR */
+.sidebar {
+  width: 240px;
+  background: #f3f4f6;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
 
- h2 {
-   text-align: center;
-   font-size: 18px;
-   margin-bottom: 15px;
- }
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
- label {
-   font-size: 13px;
-   font-weight: bold;
-   margin-bottom: 4px;
-   display: block;
- }
+.arrow {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
 
- input,
- select,
- textarea {
-   width: 90%;
-   padding: 8px;
-   margin-bottom: 10px;
-   font-size: 13px;
-   border-radius: 4px;
-   border: 1px solid #ccc;
- }
+/* rotate arrow when open */
+.arrow.open {
+  transform: rotate(90deg);
+}
 
- textarea {
-   resize: none;
- }
+/* Logo */
+.sidebar-logo {
+  width: 100%;
+  padding: 5px 20px;
+  border-bottom: 1px solid #ddd;
+}
 
- button {
-   width: 100%;
-   padding: 8px;
-   font-size: 14px;
-   background-color: #007bff;
-   border: none;
-   color: white;
-   border-radius: 4px;
-   cursor: pointer;
- }
+.sb-logo {
+  width: 150px;
+}
 
- .add-user-btn {
-   width: 12%;
-   border-radius: 7px;
- }
+/* Groups */
+.sidebar-group {
+  margin-top: 10px;
+}
 
- button:hover {
-   background-color: #0056b3;
- }
+/* Main item */
+.sidebar-item {
+  padding: 12px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #333;
+}
 
- .errormessage {
-   color: red;
-   font-size: 12px;
-   margin: 0 0 10px 0;
-   padding: 0;
-   list-style-type: none;
- }
+.sidebar-item:hover {
+  background: #e7e7e7;
+}
 
+/* Submenu */
+.sidebar-submenu {
+  display: flex;
+  flex-direction: column;
+}
 
+/* Sub items */
+.sidebar-link {
+  padding: 10px 40px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #444;
+}
 
- /* ----------------  */
- /* TABLE SECTION */
- /* ----------------  */
+.sidebar-link:hover {
+  background: #eeeeee;
+}
 
- table {
-   width: 100%;
-   margin-top: 20px;
-   border: 1px solid #ddd;
-   border-radius: 12px;
-   border-collapse: separate;
-   border-spacing: 0;
-   overflow: hidden;
- }
+.sidebar-active {
+  background: #e7e7e7;
+  font-weight: 600;
+  cursor: auto;
+}
 
- tbody {
-   display: block;
-   max-height: 590px;
-   overflow-y: scroll;
- }
+.sidebar-active:hover {
+  background: #e7e7e7;
+  cursor: auto;
+}
 
- /* make tbody rows behave like table rows */
- tbody tr {
-   display: table;
-   width: 100%;
-   table-layout: fixed;
- }
+/* MAIN AREA */
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
- /* Scrollbar design */
- tbody::-webkit-scrollbar {
-   width: 10px;
- }
+/* TOP NAVBAR */
+.top-navbar {
+  height: 60px;
+  background: #4784BF;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+}
 
- tbody::-webkit-scrollbar-track {
-   background: #f1f1f1;
-   border-radius: 10px;
- }
+/* Logout */
+.btn-logout {
+  background: white;
+  color: #4784BF;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
 
- tbody::-webkit-scrollbar-thumb {
-   background: #c1c1c1;
-   border-radius: 10px;
- }
+.btn-logout:hover {
+  background: #f2f2f2;
+}
 
- tbody::-webkit-scrollbar-thumb:hover {
-   background: #a8a8a8;
- }
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  background: #f4f6f9;
+  /* padding: 30px; */
+  padding-top: 20px;
+  overflow-y: auto;
+  /* Added this so your main content scrolls if the table is too long */
+}
 
- /* keep header fixed */
- thead {
-   display: table;
-   width: 100%;
-   table-layout: fixed;
- }
+/* ----------------  */
+/* TABLE SECTION     */
+/* ----------------  */
 
- tr:first {
-   border-radius: 12px;
- }
+.card {
+  overflow-x: auto;
+}
 
- th,
- td {
-   padding: 10px;
-   text-align: left;
-   /* border-bottom: 1px solid #ddd; */
-   font-size: 13px;
-   vertical-align: middle;
- }
+.card-body {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
 
- th {
-   background-color: #4784BF;
-   color: white;
-   border: none;
- }
+h2 {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
 
- th:first-child {
-   border-top-left-radius: 12px;
- }
+label {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  display: block;
+}
 
- th:last-child {
-   border-top-right-radius: 12px;
- }
+input,
+select,
+textarea {
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
 
- tr:nth-child(even) td {
-   background-color: #f4f4f4;
- }
+textarea {
+  resize: none;
+}
 
- .cmd-btn {
-   justify-content: center;
- }
+button {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
- .edit-btn {
-   background-color: #17a2b8;
-   color: white;
-   border: none;
-   padding: 5px 10px;
-   border-radius: 7px;
-   cursor: pointer;
-   min-width: 70px;
-   max-width: 25%;
- }
+.add-user-btn {
+  width: 12%;
+  border-radius: 7px;
+}
 
- .edit-btn:hover {
-   background-color: #127c8d;
- }
+button:hover {
+  background-color: #0056b3;
+}
 
- .del-btn {
-   background-color: #dc3545;
-   color: white;
-   border: none;
-   /* padding: 5px 10px; */
-   border-radius: 7px;
-   cursor: pointer;
-   min-width: 80px;
-   max-width: 25%;
- }
+.errormessage {
+  color: red;
+  font-size: 12px;
+  margin: 0 0 10px 0;
+  padding: 0;
+  list-style-type: none;
+}
 
- .del-btn:hover {
-   background-color: #b52c39;
- }
+table {
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
 
+tbody {
+  display: block;
+  max-height: 590px;
+  overflow-y: scroll;
+}
 
+/* make tbody rows behave like table rows */
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
 
- /* ----------------  */
- /* PAGE SECTION */
- /* ----------------  */
+/* Scrollbar design */
+tbody::-webkit-scrollbar {
+  width: 10px;
+}
 
- /* PAGE DROPDOWN SECTION */
+tbody::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
 
- .page-card-div {
-   display: flex;
-   /* flex-direction: column; */
-   justify-content: center;
-   align-items: center;
-   /* vertical center */
-   margin-bottom: 10px;
-   gap: 30px;
- }
+tbody::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
 
- .rpp-div {
-   display: flex;
-   align-items: center;
- }
+tbody::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
 
- .rpp-text {
-   margin-left: 8px;
-   margin-right: 10px;
- }
+/* keep header fixed */
+thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
 
- .rpp-dropdown {
-   width: 55px;
-   padding: 5px;
-   font-size: 13px;
-   border-radius: 4px;
-   border: 1px solid #ccc;
+tr:first-child {
+  border-radius: 12px;
+}
 
-   margin: 0;
-   /* remove default margins */
-   height: 28px;
-   /* match height with other controls */
-   box-sizing: border-box;
- }
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  font-size: 13px;
+  vertical-align: middle;
+}
 
- .page-div {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   margin-top: 0px;
- }
+th {
+  background-color: #4784BF;
+  color: white;
+  border: none;
+}
 
- /* Remove arrows in Chrome, Edge, Safari */
- .go-page-input::-webkit-outer-spin-button,
- .go-page-input::-webkit-inner-spin-button {
-   -webkit-appearance: none;
-   margin: 0;
- }
+th:first-child {
+  border-top-left-radius: 12px;
+}
 
- /* Remove arrows in Firefox */
- .go-page-input {
-   -moz-appearance: textfield;
- }
+th:last-child {
+  border-top-right-radius: 12px;
+}
 
- .span-page-text {
-   min-width: 150px;
-   text-align: center;
- }
+tr:nth-child(even) td {
+  background-color: #f4f4f4;
+}
 
- .btn-page {
-   min-width: 80px;
-   max-width: 7%;
-   border-radius: 7px;
- }
+.cmd-btn {
+  justify-content: center;
+}
 
- .btn-page:disabled {
-   background-color: #3278c4;
-   cursor: not-allowed;
- }
+.edit-btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  min-width: 70px;
+  max-width: 25%;
+}
 
- .page-input-div {
-   display: flex;
-   align-items: center;
- }
+.edit-btn:hover {
+  background-color: #127c8d;
+}
 
- .span-page-go {
-   margin: 0px 10px;
- }
+.del-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  min-width: 80px;
+  max-width: 25%;
+}
 
- .go-page-input {
-   width: 55px;
-   padding: 6px;
-   margin-bottom: 0;
-   font-size: 12px;
-   border-radius: 4px;
-   border: 1px solid #ccc;
-   margin-right: 15px;
- }
+.del-btn:hover {
+  background-color: #b52c39;
+}
 
- .btn-go-page {
-   min-width: 50px;
-   max-width: 7%;
-   border-radius: 7px;
-   padding: 6px;
- }
+/* ----------------  */
+/* PAGE SECTION      */
+/* ----------------  */
 
- .btn-container {
-   display: flex;
-   gap: 10px;
- }
+.page-card-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 30px;
+}
+
+.rpp-div {
+  display: flex;
+  align-items: center;
+}
+
+.rpp-text {
+  margin-left: 8px;
+  margin-right: 10px;
+}
+
+.rpp-dropdown {
+  width: 55px;
+  padding: 5px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin: 0;
+  height: 28px;
+  box-sizing: border-box;
+}
+
+.page-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+/* Remove arrows in Chrome, Edge, Safari */
+.go-page-input::-webkit-outer-spin-button,
+.go-page-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove arrows in Firefox */
+.go-page-input {
+  -moz-appearance: textfield;
+}
+
+.span-page-text {
+  min-width: 150px;
+  text-align: center;
+}
+
+.btn-page {
+  min-width: 80px;
+  max-width: 7%;
+  border-radius: 7px;
+}
+
+.btn-page:disabled {
+  background-color: #3278c4;
+  cursor: not-allowed;
+}
+
+.page-input-div {
+  display: flex;
+  align-items: center;
+}
+
+.span-page-go {
+  margin: 0px 10px;
+}
+
+.go-page-input {
+  width: 55px;
+  padding: 6px;
+  margin-bottom: 0;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 15px;
+}
+
+.btn-go-page {
+  min-width: 50px;
+  max-width: 7%;
+  border-radius: 7px;
+  padding: 6px;
+}
+
+.btn-container {
+  display: flex;
+  gap: 10px;
+}

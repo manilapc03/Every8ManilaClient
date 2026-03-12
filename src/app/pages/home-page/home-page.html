@@ -1,93 +1,73 @@
-<!-- <p>home-page works!</p>
-<div class="container">
-    
+<div class="dashboard">
 
-    <button class="btn btn-primary " (click)="handlelogout()" >Logout</button>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
 
-
-    @if(this.authService.isLoggedIn()) {
-        <div>
-            <h6>Token: {{this.authService.getToken()}}</h6>
-            <h6>Refresh Token: {{this.authService.getRefreshToken()}}</h6>
-        </div>
-        <button class="btn btn-primary " (click)="handleRefreshToken()" >Refresh Token</button>
-
-        <div>
-            <button class="btn btn-primary " (click)="handleAccessCountList()" >AccessCount List</button>
+        <div class="sidebar-logo">
+            <img src="https://i.imgur.com/berYa9y.png" alt="" class="sb-logo">
         </div>
 
-        <div>
-            <button class="btn btn-primary " (click)="handleUserList()" >User List</button>
+        <div class="sidebar-group">
+            @if(this.authService.isLoggedIn()) {
+
+            <div class="sidebar-item" (click)="handleHomePage()">
+                Home
+            </div>
+
+            <div class="sidebar-item dropdown-header"
+                (click)="showTables = !showTables">
+
+                <span>List of Tables</span>
+
+                <span class="arrow"
+                    [class.open]="showTables">
+                    ›
+                </span>
+
+            </div>
+
+            @if(showTables) {
+
+            <div class="sidebar-submenu">
+
+                <div class="sidebar-link" (click)="handleAccessCountList()">
+                    AccessCount
+                </div>
+
+                <div class="sidebar-link" (click)="handleShopList()">
+                    Shop
+                </div>
+
+                <div class="sidebar-link" (click)="handleUserList()">
+                    User
+                </div>
+
+                <div class="sidebar-link" (click)="handleUsersBlockShopList()">
+                    UsersBlockShop
+                </div>
+
+            </div>
+
+            }
+        }
         </div>
 
-    }
-
-  <app-debug-panel [form]="" />
-
-</div> -->
-
-
-<div class="home-page">
-
-    <div class="top-bar">
-        <button class="btn-logout" (click)="handlelogout()">Logout</button>
     </div>
 
-    <div class="container main-container">
+    <!-- MAIN AREA -->
+    <div class="main-area">
 
-        @if(this.authService.isLoggedIn()) {
+        <!-- TOP NAVBAR -->
+        <div class="top-navbar">
+            <div class="nav-title">Dashboard</div>
 
-        <!-- TOKEN SECTION -->
-        <div class="token-section">
-
-            <h4 class="section-title">Authentication</h4>
-
-            <div class="token-box">
-                <p><strong>Token:</strong></p>
-                <div class="token-text">{{this.authService.getToken()}}</div>
-            </div>
-
-            <div class="token-box">
-                <p><strong>Refresh Token:</strong></p>
-                <div class="token-text">{{this.authService.getRefreshToken()}}</div>
-            </div>
-
-            <button class="btn-refresh" (click)="handleRefreshToken()">
-                Refresh Token
-            </button>
-
+            <button class="btn-logout" (click)="handlelogout()">Logout</button>
         </div>
 
-        <hr class="section-divider">
-
-        <!-- TABLE LIST SECTION -->
-        <div class="table-section">
-
-            <h4 class="section-title">List of Tables</h4>
-
-            <div class="table-list">
-
-                <button class="btn-table" (click)="handleAccessCountList()">
-                    AccessCount List
-                </button>
-
-                <button class="btn-table" (click)="handleShopList()">
-                    Shop List
-                </button>
-
-                <button class="btn-table" (click)="handleUserList()">
-                    User List
-                </button>
-
-                <button class="btn-table" (click)="handleUsersBlockShopList()">
-                    UsersBlockShop List
-                </button>
-
-            </div>
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
 
         </div>
-
-        }
 
     </div>
 

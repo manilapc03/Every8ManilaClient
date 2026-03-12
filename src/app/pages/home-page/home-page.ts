@@ -12,6 +12,7 @@ import { DebugPanelComponent } from '../../components/debug-panel.component/debu
 })
 export class HomePage {
 
+  showTables = false;
   router = inject(Router);
 
   authService = inject(AuthService);
@@ -20,6 +21,10 @@ export class HomePage {
 
   handlelogout() {
     this.authService.logout();
+  }
+
+  handleHomePage() {
+    this.router.navigateByUrl("/")
   }
 
   handleRefreshToken() {
