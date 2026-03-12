@@ -226,11 +226,6 @@ tr:nth-child(even) td {
     margin: 0;
 }
 
-/* Remove arrows in Firefox */
-.go-page-input {
-    -moz-appearance: textfield;
-}
-
 .span-page-text {
     min-width: 150px;
     text-align: center;
