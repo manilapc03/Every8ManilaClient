@@ -12,6 +12,7 @@ import { DebugPanelComponent } from '../../components/debug-panel.component/debu
 })
 export class HomePage {
 
+  showTables = false;
   router = inject(Router);
 
   authService = inject(AuthService);
@@ -22,21 +23,28 @@ export class HomePage {
     this.authService.logout();
   }
 
-  handleRefreshToken() {
-    this.authService.refreshToken();
+  handleHomePage() {
+    this.router.navigateByUrl("/")
   }
 
-  handleUserList() {
-    this.router.navigateByUrl("/userlist")
+  handleRefreshToken() {
+    this.authService.refreshToken();
   }
 
   handleAccessCountList() {
     this.router.navigateByUrl("/accesscountlist")
   }
 
-  handleShopList(){
+  handleShopList() {
     this.router.navigateByUrl("/shopList")
   }
-  
+
+  handleUserList() {
+    this.router.navigateByUrl("/userlist")
+  }
+
+  handleUsersBlockShopList() {
+    this.router.navigateByUrl("/usersblockshoplist")
+  }
 
 }
