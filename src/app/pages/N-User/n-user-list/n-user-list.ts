@@ -109,20 +109,10 @@ export class NUserList implements OnInit {
   }
 
   deleteHandler(id: number) {
-    //alert("deleteHandler:"+id);
-
     if(confirm('Are you sure to delete this User?')) {
       this.userService.deleteUserById(id);
-
-      // this.userService.deleteEmployee(id).subscribe(() => {
-      //   // Refresh the list after deletion
-      //   this.api.GetallEmployee().subscribe(items => {
-      //     this.emplist.set(items);
-      //   });
-      // });
-
+      this.updatePage();
     }
-
   }
 
 
