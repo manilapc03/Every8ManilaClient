@@ -112,6 +112,7 @@ export class NUserList implements OnInit {
     //alert("deleteHandler:"+id);
 
     if(confirm('Are you sure to delete this User?')) {
+      this.userService.deleteUserById(id);
 
       // this.userService.deleteEmployee(id).subscribe(() => {
       //   // Refresh the list after deletion
