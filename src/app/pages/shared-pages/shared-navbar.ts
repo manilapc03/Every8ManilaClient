@@ -1,19 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
-// IMPORTANT: You need to import your AuthService here so the HTML can use it!
-// import { AuthService } from '../services/Auth/auth.service'; 
+import { AuthService } from '../../services/Auth/auth-service';
 
 @Component({
     selector: 'app-shared-navbar',
     standalone: true,
-    imports: [RouterOutlet, RouterLink, RouterLinkActive], // <-- REQUIRED for routing and routerLink!
+    imports: [RouterOutlet, RouterLink, RouterLinkActive],
     templateUrl: './shared-navbar.html',
     styleUrl: './shared-navbar.css'
 })
 export class SharedNavbarComponent {
     // Inject your router and auth service
     router = inject(Router);
-    // authService = inject(AuthService); // Uncomment when your service is imported
+    authService = inject(AuthService);
 
     // Controls the sidebar dropdown
     showTables = false;
