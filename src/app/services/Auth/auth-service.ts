@@ -41,7 +41,7 @@ export class AuthService {
       .pipe(take(1))
       .subscribe( {
         next: (response) => this.handleSuccessLogging(response.token, response.refreshToken),
-        error: (err) => console.log(err.error.message || 'Login failed'),
+        error: (err) => alert(err.error.message || 'Login failed'),
         complete: () => console.log('this.authClient.socialLogin - Done.'),
       });
   }
@@ -56,7 +56,7 @@ export class AuthService {
       .pipe(take(1))
       .subscribe( {
         next: (response) => this.handleSuccessLogging(response.token, response.refreshToken),
-        error: (err) => console.log(err.error.message || 'Login failed'),
+        error: (err) => alert(err.error.message || 'Login failed'),
         complete: () => console.log('this.authClient.login - Done.'),
       });
   }
@@ -121,6 +121,7 @@ export class AuthService {
 
   public logout() 
   {
+    debugger;
     localStorage.removeItem(this.accessTokenKey);
     localStorage.removeItem(this.refreshTokenKey);
     this.socialAuthService.signOut(true);
