@@ -11,10 +11,10 @@
     padding-bottom: 0px;
 }
 
-h2 {
+.table-title {
     text-align: center;
-    font-size: 18px;
-    margin-bottom: 15px;
+    color: #1A374D;
+    ;
 }
 
 label {
@@ -43,7 +43,8 @@ button {
     width: 100%;
     padding: 8px;
     font-size: 14px;
-    background-color: #007bff;
+    font-weight: 600;
+    background-color: #6998AB;
     border: none;
     color: white;
     border-radius: 4px;
@@ -56,7 +57,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: color-mix(in srgb, rgb(105, 152, 171) 80%, black);
 }
 
 .errormessage {
@@ -122,6 +123,7 @@ tr:first-child {
 
 th,
 td {
+    color: #1A374D;
     padding: 10px;
     text-align: left;
     font-size: 13px;
@@ -129,7 +131,8 @@ td {
 }
 
 th {
-    background-color: #4784BF;
+    /* background-color: #4784BF; */
+    background-color: #406882;
     color: white;
     border: none;
 }
@@ -151,7 +154,7 @@ tr:nth-child(even) td {
 }
 
 .edit-btn {
-    background-color: #17a2b8;
+    background-color: #527A8C;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -162,11 +165,11 @@ tr:nth-child(even) td {
 }
 
 .edit-btn:hover {
-    background-color: #127c8d;
+    background-color: color-mix(in srgb, #527A8C 80%, black);
 }
 
 .del-btn {
-    background-color: #dc3545;
+    background-color: rgb(197, 87, 87);
     color: white;
     border: none;
     border-radius: 7px;
@@ -176,7 +179,7 @@ tr:nth-child(even) td {
 }
 
 .del-btn:hover {
-    background-color: #b52c39;
+    background-color: color-mix(in srgb, #C55757 80%, black);
 }
 
 /* ----------------  */
@@ -238,7 +241,7 @@ tr:nth-child(even) td {
 }
 
 .btn-page:disabled {
-    background-color: #3278c4;
+    background-color: #1A374D;
     cursor: not-allowed;
 }
 

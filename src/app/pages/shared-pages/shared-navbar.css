@@ -106,18 +106,21 @@ body {
 /* TOP NAVBAR */
 .top-navbar {
     height: 60px;
-    background: #4784BF;
+    /* background: #4784BF; */
+    background-color: #1A374D;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 25px;
+    font-weight: 600;
 }
 
 /* Logout */
 .btn-logout {
     background: white;
-    color: #4784BF;
+    color: #1A374D;
+    font-weight: 600;
     border: none;
     padding: 6px 16px;
     border-radius: 5px;
@@ -132,7 +135,7 @@ body {
 /* MAIN CONTENT */
 .main-content {
     flex: 1;
-    background: #f4f6f9;
+    background: #adcbd719;
     /* padding: 30px; */
     padding-top: 20px;
     overflow-y: auto;
