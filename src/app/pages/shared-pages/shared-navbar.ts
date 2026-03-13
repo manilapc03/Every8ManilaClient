@@ -19,7 +19,7 @@ export class SharedNavbarComponent {
 
     // Logout handler
     handlelogout() {
-        // this.authService.logout();
+        this.authService.logout();
         this.router.navigate(['/login']);
     }
 }
