@@ -7,34 +7,36 @@
                     <button style="width: 15%;" class="btn-primary" (click)="addHandler()">Add</button>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered text-center">
-                        <thead>
-                            <tr>
-                                <th scope="col">UID</th>
-                                <th scope="col">gyousyu_id</th>
-                                <th scope="col">gyousyu_group_id</th>
-                                <th scope="col">shop_id</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @for (item of this.pageDataList(); track item.uid) {
+                    <div class="table-wrapper">
+                        <table class="table table-bordered text-center">
+                            <thead>
                                 <tr>
-                                    <td>{{item.uid}}</td>
-                                    <td>{{item.gyousyu_id}}</td>
-                                    <td>{{item.gyousyu_group_id}}</td>
-                                    <td>{{item.shop_id}}</td>
-                                    <td>
-                                        <div class="btn-container cmd-btn">
-                                            <button class="edit-btn" (click)="editHandler(item.uid)">Edit</button>
-                                            <button class="del-btn" (click)="deleteHandler(item.uid)">Delete</button>                            
-                                        </div>
-                                    </td>
+                                    <th scope="col">UID</th>
+                                    <th scope="col">gyousyu_id</th>
+                                    <th scope="col">gyousyu_group_id</th>
+                                    <th scope="col">shop_id</th>
+                                    <th scope="col"></th>
                                 </tr>
-                            } 
-                        </tbody>
-                    </table>
+                            </thead>
+
+                            <tbody>
+                                @for (item of this.pageDataList(); track item.uid) {
+                                    <tr>
+                                        <td>{{item.uid}}</td>
+                                        <td>{{item.gyousyu_id}}</td>
+                                        <td>{{item.gyousyu_group_id}}</td>
+                                        <td>{{item.shop_id}}</td>
+                                        <td>
+                                            <div class="btn-container cmd-btn">
+                                                <button class="edit-btn" (click)="editHandler(item.uid)">Edit</button>
+                                                <button class="del-btn" (click)="deleteHandler(item.uid)">Delete</button>                            
+                                            </div>
+                                        </td>
+                                    </tr>
+                                } 
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="card-action p-2 page-card-div">

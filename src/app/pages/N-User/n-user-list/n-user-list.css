@@ -1,9 +1,5 @@
-/* ----------------  */
-/* TABLE SECTION     */
-/* ----------------  */
-
-.card {
-  overflow-x: auto;
+.container {
+  padding-top: 10px;
 }
 
 .card-body {
@@ -40,7 +36,6 @@ textarea {
 }
 
 button {
-  width: 100%;
   padding: 8px;
   font-size: 14px;
   font-weight: 600;
@@ -68,72 +63,73 @@ button:hover {
   list-style-type: none;
 }
 
-table {
+/* ----------------  */
+/* TABLE SECTION     */
+/* ----------------  */
+
+.table-wrapper {
   width: 100%;
-  margin-top: 20px;
+  max-height: 590px;
+  overflow: auto;
   border: 1px solid #ddd;
   border-radius: 12px;
-  border-collapse: separate;
-  border-spacing: 0;
-  overflow: hidden;
 }
 
-tbody {
-  display: block;
-  max-height: 590px;
-  overflow-y: scroll;
-}
-
-/* make tbody rows behave like table rows */
-tbody tr {
-  display: table;
+table {
   width: 100%;
-  table-layout: fixed;
+  min-width: 1200px;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  white-space: nowrap;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: #406882;
+  margin: 0;
 }
 
 /* Scrollbar design */
-tbody::-webkit-scrollbar {
-  width: 10px;
+.table-wrapper::-webkit-scrollbar {
+  width: 7.5px;
+  height: 7.5px;
 }
 
-tbody::-webkit-scrollbar-track {
+.table-wrapper::-webkit-scrollbar-track {
   background: #f1f1f1;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #406882a7;
   border-radius: 10px;
 }
 
-tbody::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 10px;
-}
-
-tbody::-webkit-scrollbar-thumb:hover {
+.table-wrapper::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
 
-/* keep header fixed */
-thead {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
-
-tr:first-child {
-  border-radius: 12px;
-}
+/* tr:first-child {
+    border-radius: 12px;
+} */
 
 th,
 td {
   color: #1A374D;
-  padding: 10px;
+  padding: 7.7px;
   text-align: left;
   font-size: 13px;
   vertical-align: middle;
 }
 
 th {
-  /* background-color: #4784BF; */
   background-color: #406882;
   color: white;
+  margin: 0;
   border: none;
 }
 
@@ -150,6 +146,7 @@ tr:nth-child(even) td {
 }
 
 .cmd-btn {
+  width: auto;
   justify-content: center;
 }
 
@@ -232,6 +229,7 @@ tr:nth-child(even) td {
 .span-page-text {
   min-width: 150px;
   text-align: center;
+  color: #406882;
 }
 
 .btn-page {
