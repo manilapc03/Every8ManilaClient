@@ -1,152 +1,135 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
+                <div class="card-header">
+                    <h2 class="table-title">N-Shop</h2>
+                    <button style="width: 15%;" class="add-button btn-primary" (click)="addHandler()">Add</button>
+                </div>
 
-                        <div class="card">
+                <div class="card-body">
 
-                            <div class="card-header">
-                                <h5 class="text-success text-center" style="font-size:30px">N-Shop</h5>
-                                <button style="width: 15%;" class="btn-primary" (click)="addHandler()">Add</button>
-                            </div>
+                    <table class="table table-bordered text-center">
 
-                            <div class="card-body">
+                        <thead>
+                            <tr>
+                                <th scope="col">Shop ID</th>
+                                <th scope="col">Shop Name</th>
+                                <th scope="col">Yomi</th>
+                                <th scope="col">Hirakana</th>
+                                <th scope="col">Todokede</th>
+                                <th scope="col">URL Name</th>
+                                <th scope="col">Area ID</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
 
-                                <table class="table table-bordered text-center">
+                        <tbody>
 
-                                    <thead>
-                                        <tr>
-                                            <th>Shop ID</th>
-                                            <th>Shop Name</th>
-                                            <th>Yomi</th>
-                                            <th>Hirakana</th>
-                                            <th>Todokede</th>
-                                            <th>URL Name</th>
-                                            <th>Area ID</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
+                            @for (item of this.pageDataList(); track item.shop_id) {
+                            <tr>
 
-                                    <tbody>
+                                <td>{{item.shop_id}}</td>
+                                <td>{{item.shop_name}}</td>
+                                <td>{{item.shop_name_yomi}}</td>
+                                <td>{{item.shop_name_hirakana}}</td>
+                                <td>{{item.shop_name_todokede}}</td>
+                                <td>{{item.shop_url_name}}</td>
+                                <td>{{item.area_id}}</td>
 
-                                        @for (item of this.pageDataList(); track item.shop_id) {
+                                <td>
+                                    <div class="btn-container cmd-btn">
 
-                                        <tr>
+                                        <button class="edit-btn"
+                                            (click)="editHandler(item.shop_id.toString())">
+                                            Edit
+                                        </button>
 
-                                            <td>{{item.shop_id}}</td>
-                                            <td>{{item.shop_name}}</td>
-                                            <td>{{item.shop_name_yomi}}</td>
-                                            <td>{{item.shop_name_hirakana}}</td>
-                                            <td>{{item.shop_name_todokede}}</td>
-                                            <td>{{item.shop_url_name}}</td>
-                                            <td>{{item.area_id}}</td>
+                                        <button class="del-btn"
+                                            (click)="deleteHandler(item.shop_id.toString())">
+                                            Delete
+                                        </button>
 
-                                            <td>
+                                    </div>
+                                </td>
 
-                                                <div class="btn-container cmd-btn">
+                            </tr>
+                            }
 
-                                                    <button class="edit-btn"
-                                                        (click)="editHandler(item.shop_id.toString())">
+                        </tbody>
 
-                                                        Edit
+                    </table>
 
-                                                    </button>
+                </div>
 
-                                                    <button class="del-btn"
-                                                        (click)="deleteHandler(item.shop_id.toString())">
+                <div class="card-action p-2 page-card-div">
 
-                                                        Delete
+                    <div class="rpp-div">
+                        <span class="rpp-text">Result per page</span>
 
-                                                    </button>
+                        <select class="rpp-dropdown"
+                            [value]="selectedPagesize()"
+                            (change)="onChange($event)">
 
-                                                </div>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
 
-                                            </td>
+                        </select>
+                    </div>
 
-                                        </tr>
+                    <div class="page-div">
 
-                                        }
+                        <button class="btn-page btn-primary"
+                            (click)="prevPage()"
+                            [disabled]="currentPage() === 1">
 
-                                    </tbody>
+                            Previous
 
-                                </table>
+                        </button>
 
-                            </div>
+                        <span class="text-danger span-page-text">
+                            Page {{currentPage()}} of {{this.shopService.dataList().totalPages}}
+                        </span>
 
-                            <div class="card-action p-2 page-card-div">
+                        <button class="btn-page btn-primary"
+                            (click)="nextPage()"
+                            [disabled]="currentPage() === this.shopService.dataList().totalPages">
 
-                                <div class="rpp-div">
+                            Next
 
-                                    <span class="rpp-text">Result per page</span>
-
-                                    <select class="rpp-dropdown"
-                                        [value]="selectedPagesize()"
-                                        (change)="onChange($event)">
-
-                                        <option value="10">10</option>
-                                        <option value="20">20</option>
-                                        <option value="30">30</option>
-                                        <option value="40">40</option>
-                                        <option value="50">50</option>
-
-                                    </select>
-
-                                </div>
-
-                                <div class="page-div">
-
-                                    <button class="btn-page btn-primary"
-                                        (click)="prevPage()"
-                                        [disabled]="currentPage() === 1">
-
-                                        Previous
-
-                                    </button>
-
-                                    <span class="text-danger span-page-text">
-
-                                        Page {{currentPage()}} of {{this.shopService.dataList().totalPages}}
-
-                                    </span>
-
-                                    <button class="btn-page btn-primary"
-                                        (click)="nextPage()"
-                                        [disabled]="currentPage() === this.shopService.dataList().totalPages">
-
-                                        Next
-
-                                    </button>
-
-                                </div>
-
-                                <div class="page-input-div">
-
-                                    <span class="span-page-go">Page</span>
-
-                                    <input
-                                        class="go-page-input"
-                                        type="number"
-                                        [value]="pageInput()"
-                                        (input)="updateInputPage($any($event.target).value)"
-                                        min="1" />
-
-                                    <button
-                                        class="btn-go-page btn-primary"
-                                        (click)="getPage()"
-                                        [disabled]="currentPage() === this.shopService.dataList().totalPages">
-
-                                        Go
-
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
+                        </button>
 
                     </div>
-                </div>
-            </div>
 
-  
+                    <div class="page-input-div">
+
+                        <span class="span-page-go">Page</span>
+
+                        <input
+                            class="go-page-input"
+                            type="number"
+                            [value]="pageInput()"
+                            (input)="updateInputPage($any($event.target).value)"
+                            min="1" />
+
+                        <button
+                            class="btn-go-page btn-primary"
+                            (click)="getPage()"
+                            [disabled]="currentPage() === this.shopService.dataList().totalPages">
+
+                            Go
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
