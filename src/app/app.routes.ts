@@ -60,6 +60,16 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/N-User/n-usersfavoriteshop-list/n-usersfavoriteshop-list').then(x => x.NUsersFavoriteShopList),
         canActivate: [authGuard]
       },
+      {
+        path: 'usershopearealist',
+        loadComponent: () => import('./pages/N-User/n-usershopearea-list/n-usershopearea-list').then(x => x.NUsersHopeAreaList),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'usersjobproflist',
+        loadComponent: () => import('./pages/N-User/n-usersjobprof-list/n-usersjobprof-list').then(x => x.NUsersJobProfList),
+        canActivate: [authGuard]
+      },
       // Add your other pages here
 
 
