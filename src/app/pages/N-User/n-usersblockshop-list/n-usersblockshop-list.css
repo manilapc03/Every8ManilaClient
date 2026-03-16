@@ -129,6 +129,18 @@ button:hover {
     min-width: 80px;
 }
 
+.filter-input {
+    height: 40px;
+}
+
+/* Remove arrows in Chrome, Edge, Safari */
+.filter-input::-webkit-outer-spin-button,
+.filter-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
 /* ----------------  */
 /* TABLE SECTION     */
 /* ----------------  */
