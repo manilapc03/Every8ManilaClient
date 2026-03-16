@@ -4,7 +4,19 @@
             <div class="card">
                 <div class="card-header">
                     <h2 class="table-title">N-UsersBlockShop</h2>
-                    <button style="width: 15%;" class="btn-primary" (click)="addHandler()">Add</button>
+                    <div class="func-wrapper">
+                    <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
+                        <div class="filter-wrapper">
+                            <select name="" id="" class="dd-filter-1">
+                                <option value="">UID</option>
+                                <option value="">email</option>
+                                <option value="">username</option>
+                            </select>
+                            <input type="text" class="filter-input">
+
+                            <button class="filter-btn">Filter</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-wrapper">

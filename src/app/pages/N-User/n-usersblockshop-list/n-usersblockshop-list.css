@@ -10,7 +10,7 @@
 .table-title {
     text-align: center;
     color: #1A374D;
-    ;
+    margin-bottom: 25px;
 }
 
 label {
@@ -23,9 +23,7 @@ label {
 input,
 select,
 textarea {
-    width: 90%;
     padding: 8px;
-    margin-bottom: 10px;
     font-size: 13px;
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -46,9 +44,71 @@ button {
     cursor: pointer;
 }
 
-.add-user-btn {
-    width: 12%;
+.add-button {
+    min-width: 100px;
     border-radius: 7px;
+}
+
+
+/* ----- FILTER SECTION ----- */
+
+.func-wrapper {
+    display: flex;
+}
+
+.filter-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.filter-inputgroup {
+    /* margin: 20px 0; */
+    position: relative;
+}
+
+.filter-inputgroup label {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 15px;
+    pointer-events: none;
+    color: #6998abb6;
+    ;
+    padding: 0 5px;
+    transition: all 0.15s ease-out;
+    font-weight: 500;
+}
+
+.filter-inputgroup input {
+    color: #1A374D;
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    padding: 0 15px;
+    border: 1px solid #6998ab8b;
+    background-color: rgb(248, 248, 248);
+    outline: none;
+    border-radius: 5px;
+}
+
+.filter-inputgroup input:focus~label,
+.filter-inputgroup input:valid~label {
+    top: 0;
+    background-color: #F8F8F8;
+    font-size: 11px;
+}
+
+.func-wrapper {
+    display: flex;
+}
+
+.filter-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
 }
 
 button:hover {
@@ -61,6 +121,12 @@ button:hover {
     margin: 0 0 10px 0;
     padding: 0;
     list-style-type: none;
+}
+
+.filter-btn {
+    height: 40px;
+    vertical-align: middle;
+    min-width: 80px;
 }
 
 /* ----------------  */
