@@ -21,13 +21,12 @@ export class NUserClient {
   private http = inject(HttpClient);
 
   public getUserList(pageNumber: number, pageSize: number, searchby: string | null, keyword : string | null)
-  {
-        // public string SearchBy { get; set; } = string.Empty;
-        // public string SearchByText { get; set; } = string.Empty;
-
-    return this.http.get<ResponseData<NUsersModel>>(
-      environment.apiUrl+`/api/N_Users/GetAllUsers?PageNumber=${pageNumber}&PageSize=${pageSize}&SearchBy=${searchby}&SearchByText=${keyword}`
-    );
+  { 
+    let strURL = environment.apiUrl+`/api/N_Users/GetAllUsers?PageNumber=${pageNumber}&PageSize=${pageSize}`;      
+    if ((searchby?.trim() != '') && (keyword?.trim() != '')) {
+      strURL = strURL + `&SearchBy=${searchby}&SearchByText=${keyword}`;
+    }
+    return this.http.get<ResponseData<NUsersModel>>(strURL);
   }
 
   public getUserById(id: number)

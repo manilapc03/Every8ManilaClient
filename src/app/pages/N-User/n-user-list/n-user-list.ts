@@ -27,22 +27,19 @@ export class NUserList implements OnInit {
   onChangeSearchBy(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
     this.selectedSearchBy.set(value.toString());
-
-    //alert("this.selectedSearchBy: "+ this.selectedSearchBy);
   }
-
   
   searchInput = model<string | null>("");
   updateInputSearch(value: string) {
     this.searchInput.set(value);
-
-    //alert("this.searchInput: "+ this.searchInput);
   }
 
   filterHandler() {
-    if (this.selectedSearchBy()=="") {
+    if (this.searchInput()?.trim()==='') {
+        this.selectedSearchBy.set('');
+    }
+    if (this.selectedSearchBy()?.trim()==="") {
        this.searchInput.set("");
-       alert("this.searchInput.set('')");
     }
     this.currentPage.set(1);
     this.updatePage();
@@ -60,16 +57,12 @@ export class NUserList implements OnInit {
   });
 
   pageData = computed(() => {
-    //console.log(this.userService.data().data);
     return this.userService.data().data
   });
 
   onChangePagesize(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
     this.selectedPagesize.set(value);
-
-    //alert("this.selectedPagesize:"+this.selectedPagesize);
-
     this.pageSize.set(parseInt(value, 10));
 
     this.currentPage.set(1);
