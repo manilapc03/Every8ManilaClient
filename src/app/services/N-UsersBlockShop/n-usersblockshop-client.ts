@@ -32,10 +32,4 @@ export class NUsersBlockShopClient {
         );
     }
 
-    // GET: https://localhost:7215/api/N_UsersBlockShop/GetByIdUser/1
-    // POST:https://localhost:7215/api/N_UsersBlockShop/create
-    // PUT: https://localhost:7215/api/N_UsersBlockShop/update
-    //DELETE: https://localhost:7215/api/N_UsersBlockShop/delete?id=1
-
-
 }

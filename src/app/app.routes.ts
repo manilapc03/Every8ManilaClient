@@ -70,6 +70,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/N-User/n-usersjobprof-list/n-usersjobprof-list').then(x => x.NUsersJobProfList),
         canActivate: [authGuard]
       },
+      {
+        path: 'usersloglist',
+        loadComponent: () => import('./pages/N-User/n-userslog-list/n-userslog-list').then(x => x.NUsersLogList),
+        canActivate: [authGuard]
+      },
       // Add your other pages here
 
 
