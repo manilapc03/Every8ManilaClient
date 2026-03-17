@@ -1,7 +1,7 @@
 import { Component, inject, signal, computed, input, model, effect, OnInit } from '@angular/core';
 import { NShopBackUpFlgServiceAPI } from '../../../services/N-ShopBackUpFlg/n-shopbackupflg-service-api';
 import { ResponseData } from '../../../shared/response-data';
-import { NShopBackUpFlgModel } from '../../../model/N-ShopBackUpFlg/n-shopbackupflg';
+import { NShopBackUpFlgModel } from '../../../model/N-ShopBackUpFlg/n-shopbackupflg.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/Auth/auth-service';

@@ -2,7 +2,7 @@ import { Injectable, inject, effect, signal } from '@angular/core';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { NShopBackUpFlgModel } from '../../model/N-ShopBackUpFlg/n-shopbackupflg';
+import { NShopBackUpFlgModel } from '../../model/N-ShopBackUpFlg/n-shopbackupflg.model';
 import { ResponseData } from '../../shared/response-data';
 
 @Injectable({

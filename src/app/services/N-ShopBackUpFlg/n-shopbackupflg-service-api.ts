@@ -2,7 +2,7 @@ import { map, Observable, take, tap, delay } from 'rxjs';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Injectable, inject, signal, computed, WritableSignal } from '@angular/core';
 import { NShopBackUpFlgClient } from './n-shopbackupflg-client';
-import { NShopBackUpFlgModel } from '../../model/N-ShopBackUpFlg/n-shopbackupflg';
+import { NShopBackUpFlgModel } from '../../model/N-ShopBackUpFlg/n-shopbackupflg.model';
 import { ResponseData } from '../../shared/response-data';
 
 @Injectable({
