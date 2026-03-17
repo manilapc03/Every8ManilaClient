@@ -1,0 +1,353 @@
+.container {
+    padding-top: 10px;
+}
+
+.card-body {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.table-title {
+    text-align: center;
+    color: #1A374D;
+    margin-bottom: 25px;
+}
+
+label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: block;
+}
+
+input,
+select,
+textarea {
+    padding: 8px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #6998AB;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-button {
+    min-width: 100px;
+    border-radius: 7px;
+}
+
+
+/* ----- FILTER SECTION ----- */
+
+.func-wrapper {
+    display: flex;
+}
+
+.filter-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.filter-inputgroup {
+    /* margin: 20px 0; */
+    position: relative;
+}
+
+.filter-inputgroup label {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 15px;
+    pointer-events: none;
+    color: #6998abb6;
+    ;
+    padding: 0 5px;
+    transition: all 0.15s ease-out;
+    font-weight: 500;
+}
+
+.filter-inputgroup input {
+    color: #1A374D;
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    padding: 0 15px;
+    border: 1px solid #6998ab8b;
+    background-color: rgb(248, 248, 248);
+    outline: none;
+    border-radius: 5px;
+}
+
+.filter-inputgroup input:focus~label,
+.filter-inputgroup input:valid~label {
+    top: 0;
+    background-color: #F8F8F8;
+    font-size: 11px;
+}
+
+.func-wrapper {
+    display: flex;
+}
+
+.filter-wrapper {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+button:hover {
+    background-color: color-mix(in srgb, rgb(105, 152, 171) 80%, black);
+}
+
+.errormessage {
+    color: red;
+    font-size: 12px;
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.filter-btn {
+    height: 40px;
+    vertical-align: middle;
+    min-width: 80px;
+}
+
+.filter-input {
+    height: 40px;
+}
+
+/* Remove arrows in Chrome, Edge, Safari */
+.filter-input::-webkit-outer-spin-button,
+.filter-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* ----------------  */
+/* TABLE SECTION     */
+/* ----------------  */
+
+.table-wrapper {
+    width: 100%;
+    max-height: 590px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+}
+
+td,
+th {
+    white-space: nowrap;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background-color: #406882;
+    margin: 0;
+}
+
+/* Scrollbar design */
+.table-wrapper::-webkit-scrollbar {
+    width: 7.5px;
+    height: 7.5px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #406882a7;
+    border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* tr:first-child {
+    border-radius: 12px;
+} */
+
+th,
+td {
+    color: #1A374D;
+    padding: 7.7px;
+    text-align: left;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #406882;
+    color: white;
+    margin: 0;
+    border: none;
+}
+
+th:first-child {
+    border-top-left-radius: 12px;
+}
+
+th:last-child {
+    border-top-right-radius: 12px;
+}
+
+tr:nth-child(even) td {
+    background-color: #f4f4f4;
+}
+
+.cmd-btn {
+    width: auto;
+    justify-content: center;
+}
+
+.edit-btn {
+    background-color: #527A8C;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    min-width: 70px;
+    max-width: 25%;
+}
+
+.edit-btn:hover {
+    background-color: color-mix(in srgb, #527A8C 80%, black);
+}
+
+.del-btn {
+    background-color: rgb(197, 87, 87);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    min-width: 80px;
+    max-width: 25%;
+}
+
+.del-btn:hover {
+    background-color: color-mix(in srgb, #C55757 80%, black);
+}
+
+/* ----------------  */
+/* PAGE SECTION      */
+/* ----------------  */
+
+.page-card-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 30px;
+}
+
+.rpp-div {
+    display: flex;
+    align-items: center;
+}
+
+.rpp-text {
+    margin-left: 8px;
+    margin-right: 10px;
+}
+
+.rpp-dropdown {
+    width: 55px;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin: 0;
+    height: 28px;
+    box-sizing: border-box;
+}
+
+.page-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+/* Remove arrows in Chrome, Edge, Safari */
+.go-page-input::-webkit-outer-spin-button,
+.go-page-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.span-page-text {
+    min-width: 150px;
+    text-align: center;
+    color: #406882;
+}
+
+.btn-page {
+    min-width: 80px;
+    max-width: 7%;
+    border-radius: 7px;
+}
+
+.btn-page:disabled {
+    background-color: #1A374D;
+    cursor: not-allowed;
+}
+
+.page-input-div {
+    display: flex;
+    align-items: center;
+}
+
+.span-page-go {
+    margin: 0px 10px;
+}
+
+.go-page-input {
+    width: 55px;
+    padding: 6px;
+    margin-bottom: 0;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 15px;
+}
+
+.btn-go-page {
+    min-width: 50px;
+    max-width: 7%;
+    border-radius: 7px;
+    padding: 6px;
+}
+
+.btn-container {
+    display: flex;
+    gap: 10px;
+}

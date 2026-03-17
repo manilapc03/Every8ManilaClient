@@ -7,12 +7,14 @@
                     <div class="func-wrapper">
                     <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
                         <div class="filter-wrapper">
-                            <select name="" id="" class="dd-filter-1">
-                                <option value="">UID</option>
-                                <option value="">email</option>
-                                <option value="">username</option>
-                            </select>
-                            <input type="text" class="filter-input">
+                            <div class="filter-inputgroup">
+                                    <input  class="filter-input" type="number" required>
+                                    <label for="">uid</label>
+                                </div>
+                                <div class="filter-inputgroup">
+                                    <input  class="filter-input" type="number" class="filter-input" required>
+                                    <label for="">shop_id</label>
+                                </div>
 
                             <button class="filter-btn">Filter</button>
                         </div>
