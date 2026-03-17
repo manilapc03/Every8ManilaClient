@@ -3,15 +3,13 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="table-title">N-UsersBlockShop</h2>
+                    <h2 class="table-title">N-UsersHopeAreaShop</h2>
                     <div class="func-wrapper">
                     <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
                         <div class="filter-wrapper">
                             <select name="" id="" class="dd-filter-1">
                                 <option value="">UID</option>
-                                <option value="">gyousyu_id</option>
-                                <option value="">sgyousyu_group_id</option>
-                                <option value="">shop_id</option>
+                                <option value="">area_id</option>
                             </select>
                             <input type="text" class="filter-input">
 
@@ -25,9 +23,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">UID</th>
-                                    <th scope="col">gyousyu_id</th>
-                                    <th scope="col">gyousyu_group_id</th>
-                                    <th scope="col">shop_id</th>
+                                    <th scope="col">area_id</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -36,9 +32,7 @@
                                 @for (item of this.pageDataList(); track item.uid) {
                                     <tr>
                                         <td>{{item.uid}}</td>
-                                        <td>{{item.gyousyu_id}}</td>
-                                        <td>{{item.gyousyu_group_id}}</td>
-                                        <td>{{item.shop_id}}</td>
+                                        <td>{{item.area_id}}</td>
                                         <td>
                                             <div class="btn-container cmd-btn">
                                                 <button class="edit-btn" (click)="editHandler(item.uid)">Edit</button>
@@ -69,8 +63,8 @@
                         <button class="btn-page btn-primary" (click)="prevPage()" [disabled]="currentPage() === 1">
                             Previous
                         </button>
-                        <span class="text-danger span-page-text">Page {{currentPage()}} of {{this.usersBlockShopService.dataList().totalPages}}</span>
-                        <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.usersBlockShopService.dataList().totalPages">
+                        <span class="text-danger span-page-text">Page {{currentPage()}} of {{this.usersHopeAreaService.dataList().totalPages}}</span>
+                        <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.usersHopeAreaService.dataList().totalPages">
                             Next
                         </button>
                     </div>
@@ -78,7 +72,7 @@
                     <div class="page-input-div">
                         <span class="span-page-go">Page</span>
                         <input class="go-page-input" type="number" [value]="pageInput()" (input)="updateInputPage($any($event.target).value)" min="1"/>
-                        <button class="btn-go-page btn-primary" (click)="getPage()" [disabled]="currentPage() === this.usersBlockShopService.dataList().totalPages">
+                        <button class="btn-go-page btn-primary" (click)="getPage()" [disabled]="currentPage() === this.usersHopeAreaService.dataList().totalPages">
                             Go
                         </button>
                     </div>

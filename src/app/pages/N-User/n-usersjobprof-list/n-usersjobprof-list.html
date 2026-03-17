@@ -3,7 +3,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="table-title">N-UsersBlockShop</h2>
+                    <h2 class="table-title">N-UsersJobProfShop</h2>
                     <div class="func-wrapper">
                     <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
                         <div class="filter-wrapper">
@@ -25,9 +25,28 @@
                             <thead>
                                 <tr>
                                     <th scope="col">UID</th>
-                                    <th scope="col">gyousyu_id</th>
-                                    <th scope="col">gyousyu_group_id</th>
-                                    <th scope="col">shop_id</th>
+                                    <th scope="col">name</th>
+                                    <th scope="col">age</th>
+                                    <th scope="col">ken_id</th>
+                                    <th scope="col">address</th>
+                                    <th scope="col">email_id</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col">tel</th>
+                                    <th scope="col">renraku_id</th>
+                                    <th scope="col">renraku_jikan</th>
+                                    <th scope="col">current_job</th>
+                                    <th scope="col">height</th>
+                                    <th scope="col">weight</th>
+                                    <th scope="col">bust</th>
+                                    <th scope="col">waist</th>
+                                    <th scope="col">hip</th>
+                                    <th scope="col">cup</th>
+                                    <th scope="col">photo_1</th>
+                                    <th scope="col">photo_2</th>
+                                    <th scope="col">photo_3</th>
+                                    <th scope="col">note</th>
+                                    <th scope="col">create_date</th>
+                                    <th scope="col">update_date</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -36,9 +55,28 @@
                                 @for (item of this.pageDataList(); track item.uid) {
                                     <tr>
                                         <td>{{item.uid}}</td>
-                                        <td>{{item.gyousyu_id}}</td>
-                                        <td>{{item.gyousyu_group_id}}</td>
-                                        <td>{{item.shop_id}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.age}}</td>
+                                        <td>{{item.ken_id}}</td>
+                                        <td>{{item.address}}</td>
+                                        <td>{{item.email_id}}</td>
+                                        <td>{{item.email}}</td>
+                                        <td>{{item.tel}}</td>
+                                        <td>{{item.renraku_id}}</td>
+                                        <td>{{item.renraku_jikan}}</td>
+                                        <td>{{item.current_job}}</td>
+                                        <td>{{item.height}}</td>
+                                        <td>{{item.weight}}</td>
+                                        <td>{{item.bust}}</td>
+                                        <td>{{item.waist}}</td>
+                                        <td>{{item.hip}}</td>
+                                        <td>{{item.cup}}</td>
+                                        <td>{{item.photo_1}}</td>
+                                        <td>{{item.photo_2}}</td>
+                                        <td>{{item.photo_3}}</td>
+                                        <td>{{item.note}}</td>
+                                        <td>{{item.create_date}}</td>
+                                        <td>{{item.update_date}}</td>
                                         <td>
                                             <div class="btn-container cmd-btn">
                                                 <button class="edit-btn" (click)="editHandler(item.uid)">Edit</button>
@@ -69,8 +107,8 @@
                         <button class="btn-page btn-primary" (click)="prevPage()" [disabled]="currentPage() === 1">
                             Previous
                         </button>
-                        <span class="text-danger span-page-text">Page {{currentPage()}} of {{this.usersBlockShopService.dataList().totalPages}}</span>
-                        <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.usersBlockShopService.dataList().totalPages">
+                        <span class="text-danger span-page-text">Page {{currentPage()}} of {{this.usersJobProfService.dataList().totalPages}}</span>
+                        <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.usersJobProfService.dataList().totalPages">
                             Next
                         </button>
                     </div>
@@ -78,7 +116,7 @@
                     <div class="page-input-div">
                         <span class="span-page-go">Page</span>
                         <input class="go-page-input" type="number" [value]="pageInput()" (input)="updateInputPage($any($event.target).value)" min="1"/>
-                        <button class="btn-go-page btn-primary" (click)="getPage()" [disabled]="currentPage() === this.usersBlockShopService.dataList().totalPages">
+                        <button class="btn-go-page btn-primary" (click)="getPage()" [disabled]="currentPage() === this.usersJobProfService.dataList().totalPages">
                             Go
                         </button>
                     </div>
