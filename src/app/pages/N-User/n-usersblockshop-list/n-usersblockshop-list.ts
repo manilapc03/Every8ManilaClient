@@ -3,6 +3,8 @@ import { NUsersBlockShopServiceAPI } from '../../../services/N-UsersBlockShop/n-
 import { ResponseData } from '../../../shared/response-data';
 import { NUsersBlockShopModel } from '../../../model/N-UsersBlockShop/n-usersblockshop.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/Auth/auth-service';
 
 @Component({
     selector: 'app-n-usersblockshop-list',
@@ -12,7 +14,35 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 })
 export class NUsersBlockShopList implements OnInit {
 
+    //this.authService.refreshToken();    
+
+    showTables = true;
+    router = inject(Router);
+
+    authService = inject(AuthService);
     usersBlockShopService = inject(NUsersBlockShopServiceAPI);
+
+    selectedSearchBy = model<string | null>("name");
+    onChangeSearchBy(event: Event) {
+        const value = (event.target as HTMLSelectElement).value;
+        this.selectedSearchBy.set(value.toString());
+    }
+
+    searchInput = model<string | null>("");
+    updateInputSearch(value: string) {
+        this.searchInput.set(value);
+    }
+
+    filterHandler() {
+        if (this.searchInput()?.trim() === '') {
+            this.selectedSearchBy.set('');
+        }
+        if (this.selectedSearchBy()?.trim() === "") {
+            this.searchInput.set("");
+        }
+        this.currentPage.set(1);
+        this.updatePage();
+    }
 
     selectedPagesize = model<string | null>("10");
     pageInput = model<number>(1);
@@ -21,19 +51,16 @@ export class NUsersBlockShopList implements OnInit {
     currentPage = signal<number>(1);
 
     pageDataList = computed(() => {
-        //console.log(this.userService.dataList().data);
         return this.usersBlockShopService.dataList().data
     });
 
     pageData = computed(() => {
-        //console.log(this.userService.data().data);
         return this.usersBlockShopService.data().data
     });
 
-    onChange(event: Event) {
+    onChangePagesize(event: Event) {
         const value = (event.target as HTMLSelectElement).value;
         this.selectedPagesize.set(value);
-
         this.pageSize.set(parseInt(value, 10));
 
         this.currentPage.set(1);
@@ -59,10 +86,8 @@ export class NUsersBlockShopList implements OnInit {
 
     updatePage() {
         try {
-            this.usersBlockShopService.getUsersBlockShopList(this.currentPage(), this.pageSize()).unsubscribe();
-            this.usersBlockShopService.getUsersBlockShopList(this.currentPage(), this.pageSize());
-
-            //this.totalPage.set(this.userService.dataList().totalPages);
+            this.usersBlockShopService.getUsersBlockShopList(this.currentPage(), this.pageSize(), this.selectedSearchBy(), this.searchInput()).unsubscribe();
+            this.usersBlockShopService.getUsersBlockShopList(this.currentPage(), this.pageSize(), this.selectedSearchBy(), this.searchInput());
         } catch (error) {
             // Code to handle the error
         } finally {
@@ -74,7 +99,7 @@ export class NUsersBlockShopList implements OnInit {
 
     ngOnInit() {
         this.currentPage.set(1);
-        this.usersBlockShopService.getUsersBlockShopList(this.currentPage(), this.pageSize());
+        // this.usersBlockShopService.getUsersBlockShopList(this.currentPage(), this.pageSize());
         this.updatePage();
     }
 
@@ -87,7 +112,7 @@ export class NUsersBlockShopList implements OnInit {
     }
 
     prevPage() {
-        if (this.currentPage() > 1) {
+        if ((this.currentPage() > 1) && (this.usersBlockShopService.dataList().totalPages > 0)) {
             this.currentPage.update(currentValue => currentValue - 1);
             this.updatePage();
         }
@@ -109,19 +134,10 @@ export class NUsersBlockShopList implements OnInit {
     }
 
     deleteHandler(id: number) {
-        //alert("deleteHandler:"+id);
-
-        if (confirm('Are you sure to delete this User?')) {
-
-            // this.userService.deleteEmployee(id).subscribe(() => {
-            //   // Refresh the list after deletion
-            //   this.api.GetallEmployee().subscribe(items => {
-            //     this.emplist.set(items);
-            //   });
-            // });
-
+        if (confirm('Are you sure to delete this UsersBlockShop?')) {
+            this.usersBlockShopService.deleteUsersBlockShopById(id);
+            this.updatePage();
         }
-
     }
 
 

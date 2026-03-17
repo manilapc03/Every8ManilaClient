@@ -20,16 +20,34 @@ import { ResponseData } from '../../shared/response-data';
 export class NUsersJobProfClient {
     private http = inject(HttpClient);
 
-    public getUsersJobProfList(pageNumber: number, pageSize: number) {
-        return this.http.get<ResponseData<NUsersJobProfModel>>(
-            environment.apiUrl + `/api/N_UsersJobProf/GetAllUsersJobProf?PageNumber=${pageNumber}&PageSize=${pageSize}`
-        );
+    public getUsersJobProfList(pageNumber: number, pageSize: number, searchby: string | null, keyword: string | null) {
+        let strURL = environment.apiUrl + `/api/N_UsersJobProf/GetAllUsersJobProf?PageNumber=${pageNumber}&PageSize=${pageSize}`;
+        if ((searchby?.trim() != '') && (keyword?.trim() != '')) {
+            strURL = strURL + `&SearchBy=${searchby}&SearchByText=${keyword}`;
+        }
+        return this.http.get<ResponseData<NUsersJobProfModel>>(strURL);
     }
 
     public getUsersJobProfById(id: number) {
         return this.http.get<ResponseData<NUsersJobProfModel>>(
             environment.apiUrl + `/api/N_UsersJobProf/GetByIdUsersJobProf?id=${id}`
         );
+    }
+
+    public deleteUsersJobProfById(id: number) {
+        return this.http.delete(
+            environment.apiUrl + `/api/N_UsersJobProf/delete?id=${id}`
+        );
+    }
+
+    public createUsersJobProf(model: NUsersJobProfModel) {
+        return this.http.post(
+            environment.apiUrl + `/api/N_UsersJobProf/create`, model);
+    }
+
+    public updateUsersJobProf(model: NUsersJobProfModel) {
+        return this.http.put(
+            environment.apiUrl + `/api/N_UsersJobProf/update`, model);
     }
 
 }

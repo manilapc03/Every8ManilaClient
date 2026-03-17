@@ -11,7 +11,7 @@ import { ResponseData } from '../../shared/response-data';
     providedIn: 'root',
 })
 export class NUsersJobProfServiceAPI {
-    userJobProfClient = inject(NUsersJobProfClient);
+    usersJobProfClient = inject(NUsersJobProfClient);
 
     dataList = signal<ResponseData<NUsersJobProfModel>>({
         data: [],
@@ -37,8 +37,8 @@ export class NUsersJobProfServiceAPI {
         totalPages: 0,
     });
 
-    public getUsersJobProfList(pageNumber: number, pageSize: number) {
-        return this.userJobProfClient.getUsersJobProfList(pageNumber, pageSize)
+    public getUsersJobProfList(pageNumber: number, pageSize: number, searchby: string | null, keyword: string | null) {
+        return this.usersJobProfClient.getUsersJobProfList(pageNumber, pageSize, searchby, keyword)
             //.pipe(delay(1000))
             .subscribe({
                 next: (resp: ResponseData<NUsersJobProfModel>) => {
@@ -50,7 +50,7 @@ export class NUsersJobProfServiceAPI {
     }
 
     public getUsersJobProfById(id: number) {
-        return this.userJobProfClient.getUsersJobProfById(id)
+        return this.usersJobProfClient.getUsersJobProfById(id)
             //.pipe(delay(1000))
             .subscribe({
                 next: (resp: ResponseData<NUsersJobProfModel>) => {
@@ -60,5 +60,32 @@ export class NUsersJobProfServiceAPI {
                 complete: () => console.log('Done.'),
             });
     }
+
+    public deleteUsersJobProfById(id: number) {
+        this.usersJobProfClient.deleteUsersJobProfById(id)
+            .subscribe({
+                error: (err) => alert("Unabled to delete record with id " + id.toString() + ":" + err.error),
+                complete: () => alert(id.toString() + " has been deleted."),
+            });
+    }
+
+    public createUsersJobProf(model: NUsersJobProfModel) {
+        this.usersJobProfClient.createUsersJobProf(model)
+            .subscribe({
+                error: (err) => alert("Unabled to save record : " + err.error),
+                complete: () => alert(" UsersJobProf has been created."),
+            });
+
+    }
+
+    public updateUsersJobProf(model: NUsersJobProfModel) {
+        this.usersJobProfClient.updateUsersJobProf(model)
+            .subscribe({
+                error: (err) => alert("Unabled to save record : " + err.error),
+                complete: () => alert(" UsersJobProf has been updated."),
+            });
+
+    }
+
 
 }

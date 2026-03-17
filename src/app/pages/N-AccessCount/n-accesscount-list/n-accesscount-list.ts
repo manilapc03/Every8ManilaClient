@@ -3,6 +3,8 @@ import { NAccessCountServiceAPI } from '../../../services/N-AccessCount/n-access
 import { ResponseData } from '../../../shared/response-data';
 import { NAccessCountModel } from '../../../model/N-AccessCount/n-accesscount.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/Auth/auth-service';
 
 @Component({
     selector: 'app-n-accesscount-list',
@@ -12,7 +14,31 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 })
 export class NAccessCountList implements OnInit {
 
+    //this.authService.refreshToken();    
+
+    showTables = true;
+    router = inject(Router);
+
+    authService = inject(AuthService);
     accessCountService = inject(NAccessCountServiceAPI);
+
+    // 1. Add the 4 new Signals
+    ymdInput = signal<string>("");
+    chihouIdInput = signal<string>("");
+    typeInput = signal<string>("");
+    pageIdInput = signal<string>("");
+
+    // 2. Add the update methods called by your HTML (input) events
+    updateYmd(value: string) { this.ymdInput.set(value); }
+    updateChihouId(value: string) { this.chihouIdInput.set(value); }
+    updateType(value: string) { this.typeInput.set(value); }
+    updatePageId(value: string) { this.pageIdInput.set(value); }
+
+    // 3. Update the filter handler
+    filterHandler() {
+        this.currentPage.set(1);
+        this.updatePage();
+    }
 
     selectedPagesize = model<string | null>("10");
     pageInput = model<number>(1);
@@ -24,7 +50,7 @@ export class NAccessCountList implements OnInit {
         return this.accessCountService.dataList().data
     });
 
-    onChange(event: Event) {
+    onChangePagesize(event: Event) {
         const value = (event.target as HTMLSelectElement).value;
         this.selectedPagesize.set(value);
 
@@ -53,22 +79,23 @@ export class NAccessCountList implements OnInit {
 
     updatePage() {
         try {
-            this.accessCountService.accessCountList(this.currentPage(), this.pageSize()).unsubscribe();
-            this.accessCountService.accessCountList(this.currentPage(), this.pageSize());
-
-            //this.totalPage.set(this.accesscountService.dataList().totalPages);
+            // Pass the 4 new signal values into the service!
+            this.accessCountService.getAccessCountList(
+                this.currentPage(),
+                this.pageSize(),
+                this.ymdInput(),
+                this.chihouIdInput(),
+                this.typeInput(),
+                this.pageIdInput()
+            );
         } catch (error) {
             // Code to handle the error
-        } finally {
-            //
-            //alert("updatePage()");
         }
-
     }
 
     ngOnInit() {
         this.currentPage.set(1);
-        this.accessCountService.accessCountList(this.currentPage(), this.pageSize());
+        // this.accessCountService.accessCountList(this.currentPage(), this.pageSize());
         this.updatePage();
     }
 
@@ -81,7 +108,7 @@ export class NAccessCountList implements OnInit {
     }
 
     prevPage() {
-        if (this.currentPage() > 1) {
+        if ((this.currentPage() > 1) && (this.accessCountService.dataList().totalPages > 0)) {
             this.currentPage.update(currentValue => currentValue - 1);
             this.updatePage();
         }
@@ -98,19 +125,9 @@ export class NAccessCountList implements OnInit {
     }
 
     deleteHandler(id: string) {
-        alert("deleteHandler:" + id);
-
-        // if(confirm('Are you sure to delete this employee?')) {
-        //   this.accesscountService.deleteEmployee(id).subscribe(() => {
-        //     // Refresh the list after deletion
-        //     this.api.GetallEmployee().subscribe(items => {
-        //       this.emplist.set(items);
-        //     });
-        //   });
+        // if (confirm('Are you sure to delete this AccessCount?')) {
+        //     this.accessCountService.deleteAccessCountById(id);
+        //     this.updatePage();
         // }
-
     }
-
-
-
 }

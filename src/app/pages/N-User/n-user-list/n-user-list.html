@@ -8,7 +8,7 @@
                     <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
                         <div class="filter-wrapper">
                             <select class="dd-filter-1" [value]="selectedSearchBy()" (change)="onChangeSearchBy($event)">
-                                <option value=""></option>
+                                <option value="" selected disabled></option>
                                 <option value="uid">id</option>
                                 <option value="email">email</option>
                                 <option value="username">username</option>

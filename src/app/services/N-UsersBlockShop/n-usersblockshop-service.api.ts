@@ -11,7 +11,7 @@ import { ResponseData } from '../../shared/response-data';
     providedIn: 'root',
 })
 export class NUsersBlockShopServiceAPI {
-    userBlockShopClient = inject(NUsersBlockShopClient);
+    usersBlockShopClient = inject(NUsersBlockShopClient);
 
     dataList = signal<ResponseData<NUsersBlockShopModel>>({
         data: [],
@@ -37,8 +37,8 @@ export class NUsersBlockShopServiceAPI {
         totalPages: 0,
     });
 
-    public getUsersBlockShopList(pageNumber: number, pageSize: number) {
-        return this.userBlockShopClient.getUsersBlockShopList(pageNumber, pageSize)
+    public getUsersBlockShopList(pageNumber: number, pageSize: number, searchby: string | null, keyword: string | null) {
+        return this.usersBlockShopClient.getUsersBlockShopList(pageNumber, pageSize, searchby, keyword)
             //.pipe(delay(1000))
             .subscribe({
                 next: (resp: ResponseData<NUsersBlockShopModel>) => {
@@ -50,7 +50,7 @@ export class NUsersBlockShopServiceAPI {
     }
 
     public getUsersBlockShopById(id: number) {
-        return this.userBlockShopClient.getUsersBlockShopById(id)
+        return this.usersBlockShopClient.getUsersBlockShopById(id)
             //.pipe(delay(1000))
             .subscribe({
                 next: (resp: ResponseData<NUsersBlockShopModel>) => {
@@ -61,44 +61,31 @@ export class NUsersBlockShopServiceAPI {
             });
     }
 
-
-
-    // private handleSuccessUserList(resp: ResponseData<NUsersModel>) //: Observable<ResponseData<NUsersModel>>
-    // {  
-    //   this._dataList.set(resp);
-    // }    
-
-    /*
-    console.log(respData);
-
-    let _currentPage = respData.currentPage;
-    let _totalPages = respData.totalPages;
-    let _pageSize = respData.pageSize;
-    let _totalCount = respData.totalCount;
-    let _status = respData.status;
-    let _message = respData.message;
-    let _hasPrevious = respData.hasPrevious;
-    let _hasNext = respData.hasNext;
-
-    console.log("_currentPage="+_currentPage);
-    console.log("_totalPages="+_totalPages);
-    console.log("_pageSize="+_pageSize);
-    console.log("_totalCount="+_totalCount);
-    console.log("_status="+_status);
-    console.log("_message="+_message);
-    console.log("_hasPrevious="+_hasPrevious);
-    console.log("_hasNext="+_hasNext);
-
-    let data = respData.data;
-    for (let index = 0; index < data.length; index++) {
-        const element = data[index];    
-        let userdata = element;
-        console.log(userdata);   
-        
-        //userdata.uid;
+    public deleteUsersBlockShopById(id: number) {
+        this.usersBlockShopClient.deleteUsersBlockShopById(id)
+            .subscribe({
+                error: (err) => alert("Unabled to delete record with id " + id.toString() + ":" + err.error),
+                complete: () => alert(id.toString() + " has been deleted."),
+            });
     }
-    */
 
+    public createUsersBlockShop(model: NUsersBlockShopModel) {
+        this.usersBlockShopClient.createUsersBlockShop(model)
+            .subscribe({
+                error: (err) => alert("Unabled to save record : " + err.error),
+                complete: () => alert(" UsersBlockShop has been created."),
+            });
+
+    }
+
+    public updateUsersBlockShop(model: NUsersBlockShopModel) {
+        this.usersBlockShopClient.updateUsersBlockShop(model)
+            .subscribe({
+                error: (err) => alert("Unabled to save record : " + err.error),
+                complete: () => alert(" UsersBlockShop has been updated."),
+            });
+
+    }
 
 
 }

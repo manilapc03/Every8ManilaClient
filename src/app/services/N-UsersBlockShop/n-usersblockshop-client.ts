@@ -20,16 +20,34 @@ import { ResponseData } from '../../shared/response-data';
 export class NUsersBlockShopClient {
     private http = inject(HttpClient);
 
-    public getUsersBlockShopList(pageNumber: number, pageSize: number) {
-        return this.http.get<ResponseData<NUsersBlockShopModel>>(
-            environment.apiUrl + `/api/N_UsersBlockShop/GetAllUsersBlockShop?PageNumber=${pageNumber}&PageSize=${pageSize}`
-        );
+    public getUsersBlockShopList(pageNumber: number, pageSize: number, searchby: string | null, keyword: string | null) {
+        let strURL = environment.apiUrl + `/api/N_UsersBlockShop/GetAllUsersBlockShop?PageNumber=${pageNumber}&PageSize=${pageSize}`;
+        if ((searchby?.trim() != '') && (keyword?.trim() != '')) {
+            strURL = strURL + `&SearchBy=${searchby}&SearchByText=${keyword}`;
+        }
+        return this.http.get<ResponseData<NUsersBlockShopModel>>(strURL);
     }
 
     public getUsersBlockShopById(id: number) {
         return this.http.get<ResponseData<NUsersBlockShopModel>>(
             environment.apiUrl + `/api/N_UsersBlockShop/GetByIdUsersBlockShop?id=${id}`
         );
+    }
+
+    public deleteUsersBlockShopById(id: number) {
+        return this.http.delete(
+            environment.apiUrl + `/api/N_UsersBlockShop/delete?id=${id}`
+        );
+    }
+
+    public createUsersBlockShop(model: NUsersBlockShopModel) {
+        return this.http.post(
+            environment.apiUrl + `/api/N_UsersBlockShop/create`, model);
+    }
+
+    public updateUsersBlockShop(model: NUsersBlockShopModel) {
+        return this.http.put(
+            environment.apiUrl + `/api/N_UsersBlockShop/update`, model);
     }
 
 }

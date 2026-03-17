@@ -1,8 +1,11 @@
 import { Component, inject, signal, computed, input, model, effect, OnInit } from '@angular/core';
-import { NUsersJobProfServiceAPI } from '../../../services/N-UsersJobProf/n-usersjobprof-service.api';
+import { NUsersJobProfServiceAPI } from '../../../services/N-UsersJobProf/n-usersjobprof-service-api';
 import { ResponseData } from '../../../shared/response-data';
 import { NUsersJobProfModel } from '../../../model/N-UsersJobProf/n-usersjobprof.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/Auth/auth-service';
+
 
 @Component({
     selector: 'app-n-usersjobprof-list',
@@ -12,7 +15,35 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 })
 export class NUsersJobProfList implements OnInit {
 
+    //this.authService.refreshToken();    
+
+    showTables = true;
+    router = inject(Router);
+
+    authService = inject(AuthService);
     usersJobProfService = inject(NUsersJobProfServiceAPI);
+
+    selectedSearchBy = model<string | null>("name");
+    onChangeSearchBy(event: Event) {
+        const value = (event.target as HTMLSelectElement).value;
+        this.selectedSearchBy.set(value.toString());
+    }
+
+    searchInput = model<string | null>("");
+    updateInputSearch(value: string) {
+        this.searchInput.set(value);
+    }
+
+    filterHandler() {
+        if (this.searchInput()?.trim() === '') {
+            this.selectedSearchBy.set('');
+        }
+        if (this.selectedSearchBy()?.trim() === "") {
+            this.searchInput.set("");
+        }
+        this.currentPage.set(1);
+        this.updatePage();
+    }
 
     selectedPagesize = model<string | null>("10");
     pageInput = model<number>(1);
@@ -26,14 +57,12 @@ export class NUsersJobProfList implements OnInit {
     });
 
     pageData = computed(() => {
-        //console.log(this.userService.data().data);
         return this.usersJobProfService.data().data
     });
 
-    onChange(event: Event) {
+    onChangePagesize(event: Event) {
         const value = (event.target as HTMLSelectElement).value;
         this.selectedPagesize.set(value);
-
         this.pageSize.set(parseInt(value, 10));
 
         this.currentPage.set(1);
@@ -59,10 +88,9 @@ export class NUsersJobProfList implements OnInit {
 
     updatePage() {
         try {
-            this.usersJobProfService.getUsersJobProfList(this.currentPage(), this.pageSize()).unsubscribe();
-            this.usersJobProfService.getUsersJobProfList(this.currentPage(), this.pageSize());
+            this.usersJobProfService.getUsersJobProfList(this.currentPage(), this.pageSize(), this.selectedSearchBy(), this.searchInput()).unsubscribe();
+            this.usersJobProfService.getUsersJobProfList(this.currentPage(), this.pageSize(), this.selectedSearchBy(), this.searchInput());
 
-            //this.totalPage.set(this.userService.dataList().totalPages);
         } catch (error) {
             // Code to handle the error
         } finally {
@@ -73,8 +101,9 @@ export class NUsersJobProfList implements OnInit {
     }
 
     ngOnInit() {
+
         this.currentPage.set(1);
-        this.usersJobProfService.getUsersJobProfList(this.currentPage(), this.pageSize());
+        //this.usersJobProfService.getUsersJobProfList(this.currentPage(), this.pageSize());
         this.updatePage();
     }
 
@@ -87,7 +116,7 @@ export class NUsersJobProfList implements OnInit {
     }
 
     prevPage() {
-        if (this.currentPage() > 1) {
+        if ((this.currentPage() > 1) && (this.usersJobProfService.dataList().totalPages > 0)) {
             this.currentPage.update(currentValue => currentValue - 1);
             this.updatePage();
         }
@@ -109,21 +138,9 @@ export class NUsersJobProfList implements OnInit {
     }
 
     deleteHandler(id: number) {
-        //alert("deleteHandler:"+id);
-
-        if (confirm('Are you sure to delete this User?')) {
-
-            // this.userService.deleteEmployee(id).subscribe(() => {
-            //   // Refresh the list after deletion
-            //   this.api.GetallEmployee().subscribe(items => {
-            //     this.emplist.set(items);
-            //   });
-            // });
-
+        if (confirm('Are you sure to delete this UsersJobProf?')) {
+            this.usersJobProfService.deleteUsersJobProfById(id);
+            this.updatePage();
         }
-
     }
-
-
-
 }

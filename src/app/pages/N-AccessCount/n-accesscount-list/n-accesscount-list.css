@@ -94,7 +94,7 @@ button {
 }
 
 .filter-inputgroup input:focus~label,
-.filter-inputgroup input:valid~label {
+.filter-inputgroup input:not(:placeholder-shown)~label {
     top: 0;
     background-color: #F8F8F8;
     font-size: 11px;
