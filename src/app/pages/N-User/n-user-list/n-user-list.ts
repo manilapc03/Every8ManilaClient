@@ -52,7 +52,6 @@ export class NUserList implements OnInit {
   currentPage = signal<number>(1);
 
   pageDataList = computed(() => {
-    //console.log(this.userService.dataList().data);
     return this.userService.dataList().data
   });
 
@@ -101,7 +100,6 @@ export class NUserList implements OnInit {
   }
 
   ngOnInit() {
-
     this.currentPage.set(1);
     //this.userService.getUserList(this.currentPage(), this.pageSize());
     this.updatePage();
@@ -144,33 +142,6 @@ export class NUserList implements OnInit {
     }
   }
 
-  // handlelogout() {
-  //   this.authService.logout();
-  // }
-
-  // handleRefreshToken() {
-  //   this.authService.refreshToken();
-  // }
-
-  // handleHomePage() {
-  //   this.router.navigateByUrl("/")
-  // }
-
-  // handleAccessCountList() {
-  //   this.router.navigateByUrl("/accesscountlist")
-  // }
-
-  // handleShopList() {
-  //   this.router.navigateByUrl("/shopList")
-  // }
-
-  // handleUserList() {
-  //   this.router.navigateByUrl("/userlist")
-  // }
-
-  // handleUsersBlockShopList() {
-  //   this.router.navigateByUrl("/usersblockshoplist")
-  // }
 
 
 }

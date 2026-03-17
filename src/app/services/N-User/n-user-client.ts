@@ -1,17 +1,10 @@
 
 import { Injectable, inject, effect, signal } from '@angular/core';
-import { HttpClient, httpResource } from '@angular/common/http';
+import { HttpClient, httpResource, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { NUsersModel } from '../../model/N-User/n-users.model';
 import { ResponseData } from '../../shared/response-data';
-
-//import { PaginationParameters } from '../../shared/Pagination/pagination-parameters';
-
-// export interface PaginatedResponse<T> {
-//   data: T[];
-//   total: number;
-// }
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +15,22 @@ export class NUserClient {
 
   public getUserList(pageNumber: number, pageSize: number, searchby: string | null, keyword : string | null)
   { 
-    let strURL = environment.apiUrl+`/api/N_Users/GetAllUsers?PageNumber=${pageNumber}&PageSize=${pageSize}`;      
-    if ((searchby?.trim() != '') && (keyword?.trim() != '')) {
-      strURL = strURL + `&SearchBy=${searchby}&SearchByText=${keyword}`;
+    // let strURL = environment.apiUrl+`/api/N_Users/GetAllUsers?PageNumber=${pageNumber}&PageSize=${pageSize}`;      
+    // if ((searchby?.trim() != '') && (keyword?.trim() != '')) {
+    //   strURL = strURL + `&SearchBy=${searchby}&SearchByText=${keyword}`;
+    // }
+    // return this.http.get<ResponseData<NUsersModel>>(strURL);
+
+    let strURL = environment.apiUrl+`/api/N_Users/GetAllUsers`;    
+    let params = new HttpParams()
+      .set('PageNumber', pageNumber)
+      .set('PageSize', pageSize);      
+
+    if ((searchby?.trim() != '') && (keyword?.trim() != '')) {       
+        params = params.append('SearchBy', `${searchby}`); 
+        params = params.append('SearchByText', `${keyword}`); 
     }
-    return this.http.get<ResponseData<NUsersModel>>(strURL);
+    return this.http.get<ResponseData<NUsersModel>>(strURL, {params});
   }
 
   public getUserById(id: number)

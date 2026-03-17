@@ -15,15 +15,6 @@ export const routes: Routes = [
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent },
-  // { path: 'register', component: RegisterComponent },
-  // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-
-  // 
-  // {
-  //     path:"",component:List
-  // },
-
-
   {
     // The parent layout with the sidebar        
     path: '',
@@ -93,56 +84,8 @@ export const routes: Routes = [
       // Add your other pages here
 
 
-
-
-      // {
-      //     path: 'userlist',
-      //     component: NUserList,
-      // },
-      // {
-      //     path: 'accesscountlist',
-      //     component: NAccessCountList
-      //     //canActivate: [authGuard]  
-      // },
-      // {
-      //     path: 'shopList',
-      //     component: NShopList
-      //     //canActivate: [authGuard] 
-      // },
-      // {
-      //     path: 'usersblockshoplist',
-      //     component: NUsersBlockShopList,
-      //     //canActivate: [authGuard] 
-      // },
-
     ]   // children     
   }
-
-  // {
-  //     path: 'home',
-  //     component: HomePage,
-  //     canActivate: [authGuard]
-  // },
-  // {
-  //     path: 'accesscountlist',
-  //     component: NAccessCountList,
-  //     //canActivate: [authGuard] 
-  // },
-  // {
-  //     path: 'shopList',
-  //     component: NShopList,
-  //     //canActivate: [authGuard] 
-  // },
-  // {
-  //     path: 'userlist',
-  //     component: NUserList,
-  //     //canActivate: [authGuard] 
-  // },
-  // {
-  //     path: 'usersblockshoplist',
-  //     component: NUsersBlockShopList,
-  //     //canActivate: [authGuard] 
-  // },
 
   //4,{ path: '**', component: Notfound }
 ];
