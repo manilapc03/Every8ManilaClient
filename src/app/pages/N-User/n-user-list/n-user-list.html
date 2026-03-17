@@ -7,14 +7,14 @@
                     <div class="func-wrapper">
                     <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
                         <div class="filter-wrapper">
-                            <select name="" id="" class="dd-filter-1">
-                                <option value="">UID</option>
-                                <option value="">email</option>
-                                <option value="">username</option>
+                            <select class="dd-filter-1" [value]="selectedSearchBy()" (change)="onChangeSearchBy($event)">
+                                <option value=""></option>
+                                <option value="uid">id</option>
+                                <option value="email">email</option>
+                                <option value="username">username</option>
                             </select>
-                            <input type="text" class="filter-input">
-
-                            <button class="filter-btn">Filter</button>
+                            <input class="filter-input" type="text" [value]="searchInput()" (input)="updateInputSearch($any($event.target).value)" />
+                            <button class="filter-btn" (click)="filterHandler()">Filter</button>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="card-action p-2 page-card-div">
                     <div class="rpp-div">
                         <span class="rpp-text">Result per page</span>
-                        <select class="rpp-dropdown" [value]="selectedPagesize()" (change)="onChange($event)">
+                        <select class="rpp-dropdown" [value]="selectedPagesize()" (change)="onChangePagesize($event)">
                             <option value="10">10</option>
                             <option value="20">20</option>
                             <option value="30">30</option>

@@ -22,4 +22,8 @@ export class SharedNavbarComponent {
         this.authService.logout();
         this.router.navigate(['/login']);
     }
+
+    handleRefresh() {
+        this.authService.refreshToken();
+    }
 }

@@ -20,10 +20,13 @@ import { ResponseData } from '../../shared/response-data';
 export class NUserClient {
   private http = inject(HttpClient);
 
-  public getUserList(pageNumber: number, pageSize: number )
+  public getUserList(pageNumber: number, pageSize: number, searchby: string | null, keyword : string | null)
   {
+        // public string SearchBy { get; set; } = string.Empty;
+        // public string SearchByText { get; set; } = string.Empty;
+
     return this.http.get<ResponseData<NUsersModel>>(
-      environment.apiUrl+`/api/N_Users/GetAllUsers?PageNumber=${pageNumber}&PageSize=${pageSize}`
+      environment.apiUrl+`/api/N_Users/GetAllUsers?PageNumber=${pageNumber}&PageSize=${pageSize}&SearchBy=${searchby}&SearchByText=${keyword}`
     );
   }
 

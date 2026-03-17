@@ -37,9 +37,9 @@ export class NUserServiceAPI {
       totalPages: 0,
     });
 
-    public getUserList(pageNumber: number, pageSize: number) 
+    public getUserList(pageNumber: number, pageSize: number, searchby: string | null, keyword : string | null) 
     {
-       return this.userClient.getUserList(pageNumber, pageSize)
+       return this.userClient.getUserList(pageNumber, pageSize, searchby, keyword)
             //.pipe(delay(1000))
             .subscribe({
                 next: (resp: ResponseData<NUsersModel>) => {

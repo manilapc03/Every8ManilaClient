@@ -15,12 +15,38 @@ import { AuthService } from '../../../services/Auth/auth-service';
 })
 export class NUserList implements OnInit {
 
+  //this.authService.refreshToken();    
+
   showTables = true;
   router = inject(Router);
 
   authService = inject(AuthService);
-
   userService = inject(NUserServiceAPI);
+
+  selectedSearchBy = model<string | null>("username");
+  onChangeSearchBy(event: Event) {
+    const value = (event.target as HTMLSelectElement).value;
+    this.selectedSearchBy.set(value.toString());
+
+    //alert("this.selectedSearchBy: "+ this.selectedSearchBy);
+  }
+
+  
+  searchInput = model<string | null>("");
+  updateInputSearch(value: string) {
+    this.searchInput.set(value);
+
+    //alert("this.searchInput: "+ this.searchInput);
+  }
+
+  filterHandler() {
+    if (this.selectedSearchBy()=="") {
+       this.searchInput.set("");
+       alert("this.searchInput.set('')");
+    }
+    this.currentPage.set(1);
+    this.updatePage();
+  }
 
   selectedPagesize = model<string | null>("10");
   pageInput = model<number>(1);
@@ -38,9 +64,11 @@ export class NUserList implements OnInit {
     return this.userService.data().data
   });
 
-  onChange(event: Event) {
+  onChangePagesize(event: Event) {
     const value = (event.target as HTMLSelectElement).value;
     this.selectedPagesize.set(value);
+
+    //alert("this.selectedPagesize:"+this.selectedPagesize);
 
     this.pageSize.set(parseInt(value, 10));
 
@@ -67,10 +95,9 @@ export class NUserList implements OnInit {
 
   updatePage() {
     try {
-      this.userService.getUserList(this.currentPage(), this.pageSize()).unsubscribe();
-      this.userService.getUserList(this.currentPage(), this.pageSize());
+      this.userService.getUserList(this.currentPage(), this.pageSize(), this.selectedSearchBy(), this.searchInput()).unsubscribe();
+      this.userService.getUserList(this.currentPage(), this.pageSize(), this.selectedSearchBy(), this.searchInput());
 
-      //this.totalPage.set(this.userService.dataList().totalPages);
     } catch (error) {
       // Code to handle the error
     } finally {
@@ -81,10 +108,9 @@ export class NUserList implements OnInit {
   }
 
   ngOnInit() {
-    //this.authService.refreshToken();    
-    
+
     this.currentPage.set(1);
-    this.userService.getUserList(this.currentPage(), this.pageSize());
+    //this.userService.getUserList(this.currentPage(), this.pageSize());
     this.updatePage();
   }
 
@@ -97,7 +123,7 @@ export class NUserList implements OnInit {
   }
 
   prevPage() {
-    if (this.currentPage() > 1) {
+    if ((this.currentPage() > 1)  && (this.userService.dataList().totalPages > 0)) {
       this.currentPage.update(currentValue => currentValue - 1);
       this.updatePage();
     }
