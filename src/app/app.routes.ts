@@ -51,6 +51,21 @@ export const routes: Routes = [
         canActivate: [authGuard]
       },
       {
+        path: 'shopBackList',
+        loadComponent: () => import('./pages/N-Shop/n-shopback-list/n-shopback-list').then(x => x.NShopBackList),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'shopBackUpFlgList',
+        loadComponent: () => import('./pages/N-Shop/n-shopbackupflg-list/n-shopbackupflg-list').then(x => x.NShopBackUpFlgList),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'shopTainyuuIdentificationShopList',
+        loadComponent: () => import('./pages/N-Shop/n-shoptainyuuidentificationshop-list/n-shoptainyuuidentificationshop-list').then(x => x.NShopTainyuuIdentificationShopList),
+        canActivate: [authGuard]
+      },
+      {
         path: 'usersblockshoplist',
         loadComponent: () => import('./pages/N-User/n-usersblockshop-list/n-usersblockshop-list').then(x => x.NUsersBlockShopList),
         canActivate: [authGuard]

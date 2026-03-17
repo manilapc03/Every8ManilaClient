@@ -4,22 +4,25 @@
             <div class="card">
 
                 <div class="card-header">
-                    <h2 class="table-title">N-Shop</h2>
+                    <h2 class="table-title">N-ShopBack</h2>
 
                     <div class="func-wrapper">
 
-                    <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
+                        <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
                     
                         <div class="filter-wrapper">
-                            <select name="" id="" class="dd-filter-1">
+                            <select class="dd-filter-1">
+                                <option value="">History ID</option>
                                 <option value="">Shop ID</option>
                                 <option value="">Shop Name</option>
-                                <option value="">Shop URL name</option>
+                                <option value="">Area ID</option>
                             </select>
+
                             <input type="text" class="filter-input">
 
                             <button class="filter-btn">Filter</button>
                         </div>
+
                     </div>
                 </div>
 
@@ -29,47 +32,57 @@
 
                         <thead>
                             <tr>
-                                <th scope="col">Shop ID</th>
-                                <th scope="col">Shop Name</th>
-                                <th scope="col">Yomi</th>
-                                <th scope="col">Hirakana</th>
-                                <th scope="col">Todokede</th>
-                                <th scope="col">URL Name</th>
-                                <th scope="col">Area ID</th>
-                                <th scope="col"></th>
+                                <th>History ID</th>
+                                <th>Shop ID</th>
+                                <th>Shop Name</th>
+                                <th>Yomi</th>
+                                <th>Hirakana</th>
+                                <th>URL Name</th>
+                                <th>Area ID</th>
+                                <th></th>
                             </tr>
                         </thead>
 
                         <tbody>
 
-                            @for (item of this.pageDataList(); track item.shop_id) {
+                            @for (item of this.pageDataList(); track item.history_id) {
+
                             <tr>
 
+                                <td>{{item.history_id}}</td>
                                 <td>{{item.shop_id}}</td>
                                 <td>{{item.shop_name}}</td>
                                 <td>{{item.shop_name_yomi}}</td>
                                 <td>{{item.shop_name_hirakana}}</td>
-                                <td>{{item.shop_name_todokede}}</td>
                                 <td>{{item.shop_url_name}}</td>
                                 <td>{{item.area_id}}</td>
 
                                 <td>
+
                                     <div class="btn-container cmd-btn">
 
-                                        <button class="edit-btn"
-                                            (click)="editHandler(item.shop_id.toString())">
+                                        <button
+                                            class="edit-btn"
+                                            (click)="editHandler(item.history_id.toString())">
+
                                             Edit
+
                                         </button>
 
-                                        <button class="del-btn"
-                                            (click)="deleteHandler(item.shop_id.toString())">
+                                        <button
+                                            class="del-btn"
+                                            (click)="deleteHandler(item.history_id.toString())">
+
                                             Delete
+
                                         </button>
 
                                     </div>
+
                                 </td>
 
                             </tr>
+
                             }
 
                         </tbody>
@@ -81,9 +94,11 @@
                 <div class="card-action p-2 page-card-div">
 
                     <div class="rpp-div">
+
                         <span class="rpp-text">Result per page</span>
 
-                        <select class="rpp-dropdown"
+                        <select
+                            class="rpp-dropdown"
                             [value]="selectedPagesize()"
                             (change)="onChange($event)">
 
@@ -94,11 +109,13 @@
                             <option value="50">50</option>
 
                         </select>
+
                     </div>
 
                     <div class="page-div">
 
-                        <button class="btn-page btn-primary"
+                        <button
+                            class="btn-page btn-primary"
                             (click)="prevPage()"
                             [disabled]="currentPage() === 1">
 
@@ -107,12 +124,15 @@
                         </button>
 
                         <span class="text-danger span-page-text">
-                            Page {{currentPage()}} of {{this.shopService.dataList().totalPages}}
+
+                            Page {{currentPage()}} of {{this.shopBackService.dataList().totalPages}}
+
                         </span>
 
-                        <button class="btn-page btn-primary"
+                        <button
+                            class="btn-page btn-primary"
                             (click)="nextPage()"
-                            [disabled]="currentPage() === this.shopService.dataList().totalPages">
+                            [disabled]="currentPage() === this.shopBackService.dataList().totalPages">
 
                             Next
 
@@ -129,12 +149,12 @@
                             type="number"
                             [value]="pageInput()"
                             (input)="updateInputPage($any($event.target).value)"
-                            min="1" />
+                            min="1"/>
 
                         <button
                             class="btn-go-page btn-primary"
                             (click)="getPage()"
-                            [disabled]="currentPage() === this.shopService.dataList().totalPages">
+                            [disabled]="currentPage() === this.shopBackService.dataList().totalPages">
 
                             Go
 

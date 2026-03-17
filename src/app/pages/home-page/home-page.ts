@@ -39,6 +39,7 @@ export class HomePage {
     this.router.navigateByUrl("/shopList")
   }
 
+
   handleUserList() {
     this.router.navigateByUrl("/userlist")
   }

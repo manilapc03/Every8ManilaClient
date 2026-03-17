@@ -4,7 +4,7 @@
             <div class="card">
 
                 <div class="card-header">
-                    <h2 class="table-title">N-Shop</h2>
+                    <h2 class="table-title">N-ShopBackUpFlg</h2>
 
                     <div class="func-wrapper">
 
@@ -13,8 +13,7 @@
                         <div class="filter-wrapper">
                             <select name="" id="" class="dd-filter-1">
                                 <option value="">Shop ID</option>
-                                <option value="">Shop Name</option>
-                                <option value="">Shop URL name</option>
+                                <option value="">BackUp Flg</option>
                             </select>
                             <input type="text" class="filter-input">
 
@@ -30,12 +29,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Shop ID</th>
-                                <th scope="col">Shop Name</th>
-                                <th scope="col">Yomi</th>
-                                <th scope="col">Hirakana</th>
-                                <th scope="col">Todokede</th>
-                                <th scope="col">URL Name</th>
-                                <th scope="col">Area ID</th>
+                                <th scope="col">BackUp Flg</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -46,12 +40,7 @@
                             <tr>
 
                                 <td>{{item.shop_id}}</td>
-                                <td>{{item.shop_name}}</td>
-                                <td>{{item.shop_name_yomi}}</td>
-                                <td>{{item.shop_name_hirakana}}</td>
-                                <td>{{item.shop_name_todokede}}</td>
-                                <td>{{item.shop_url_name}}</td>
-                                <td>{{item.area_id}}</td>
+                                <td>{{item.backup_flg}}</td>
 
                                 <td>
                                     <div class="btn-container cmd-btn">
@@ -107,12 +96,12 @@
                         </button>
 
                         <span class="text-danger span-page-text">
-                            Page {{currentPage()}} of {{this.shopService.dataList().totalPages}}
+                            Page {{currentPage()}} of {{this.shopBackUpFlgService.dataList().totalPages}}
                         </span>
 
                         <button class="btn-page btn-primary"
                             (click)="nextPage()"
-                            [disabled]="currentPage() === this.shopService.dataList().totalPages">
+                            [disabled]="currentPage() === this.shopBackUpFlgService.dataList().totalPages">
 
                             Next
 
@@ -134,7 +123,7 @@
                         <button
                             class="btn-go-page btn-primary"
                             (click)="getPage()"
-                            [disabled]="currentPage() === this.shopService.dataList().totalPages">
+                            [disabled]="currentPage() === this.shopBackUpFlgService.dataList().totalPages">
 
                             Go
 
