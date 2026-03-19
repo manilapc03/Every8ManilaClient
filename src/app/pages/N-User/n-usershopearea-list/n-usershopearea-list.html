@@ -1,87 +1,82 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="table-title">N-UsersHopeAreaShop</h2>
-                    <div class="func-wrapper">
-                    <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
-                        <div class="filter-wrapper">
-                                <div class="filter-inputgroup">
-                                    <input  class="filter-input" type="number" required>
-                                    <label for="">uid</label>
-                                </div>
-                                <div class="filter-inputgroup">
-                                    <input  class="filter-input" type="number" class="filter-input" required>
-                                    <label for="">area_id</label>
-                                </div>
-
-                            <button class="filter-btn">Filter</button>
-                        </div>
+<div class="container-main">
+    <div class="card main-content-body">
+        <div class="card-header filter-card">
+            <h1 class="table-title">N-UsersHopeAreaShop</h1>
+            <div class="func-wrapper">
+                <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
+                <div class="filter-wrapper">
+                    <div class="filter-inputgroup">
+                        <input id="uid" class="filter-input" type="number" placeholder=" "
+                            [value]="uidInput()" (input)="updateUid($any($event.target).value)" />
+                        <label for="uid">uid</label>
                     </div>
+                    <div class="filter-inputgroup">
+                        <input id="area_id" class="filter-input" type="number" placeholder=" "
+                            [value]="area_idInput()" (input)="updateArea_id($any($event.target).value)" />
+                        <label for="area_id">area_id</label>
+                    </div>
+                    <button class="filter-btn" (click)="filterHandler()">Search</button>
                 </div>
-                <div class="card-body">
-                    <div class="table-wrapper">
-                        <table class="table table-bordered text-center">
-                            <thead>
-                                <tr>
-                                    <th scope="col">UID</th>
-                                    <th scope="col">area_id</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
+            </div>
+        </div>
+        <div class="card-body table-card">
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">UID</th>
+                            <th scope="col">area_id</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
 
-                            <tbody>
-                                @for (item of this.pageDataList(); track item.uid) {
-                                    <tr>
-                                        <td>{{item.uid}}</td>
-                                        <td>{{item.area_id}}</td>
-                                        <td>
-                                            <div class="btn-container cmd-btn">
-                                                <button class="edit-btn" (click)="editHandler(item.uid)">Edit</button>
-                                                <button class="del-btn" (click)="deleteHandler(item.uid)">Delete</button>                            
-                                            </div>
-                                        </td>
-                                    </tr>
-                                } 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    <tbody>
+                        @for (item of this.pageData(); track item.uid + '-' + item.area_id) {
+                            <tr>
+                                <td>{{item.uid}}</td>
+                                <td>{{item.area_id}}</td>
+                                <td>
+                                    <div class="btn-container cmd-btn">
+                                        <button class="edit-btn" (click)="editHandler(item.uid.toString())">Edit</button>
+                                        <button class="del-btn" (click)="deleteHandler(item.uid.toString())">Delete</button>                            
+                                    </div>
+                                </td>
+                            </tr>
+                        } 
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-                <div class="card-action p-2 page-card-div">
+        <div class="card-action p-2 page-card-div">
 
-                    <div class="rpp-div">
-                        <span class="rpp-text">Result per page</span>
-                        <select class="rpp-dropdown" [value]="selectedPagesize()" (change)="onChange($event)">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                            <option value="40">40</option>
-                            <option value="50">50</option>
-                        </select>
-                    </div>
+            <div class="rpp-div">
+                <span class="rpp-text">Result per page</span>
+                <select class="rpp-dropdown" [value]="selectedPagesize()" (change)="onChangePagesize($event)">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
 
-                    <div class="page-div">
-                        <button class="btn-page btn-primary" (click)="prevPage()" [disabled]="currentPage() === 1">
-                            Previous
-                        </button>
-                        <span class="text-danger span-page-text">Page {{currentPage()}} of {{this.usersHopeAreaService.dataList().totalPages}}</span>
-                        <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.usersHopeAreaService.dataList().totalPages">
-                            Next
-                        </button>
-                    </div>
+            <div class="page-div">
+                <button class="btn-page btn-primary" (click)="prevPage()" [disabled]="currentPage() === 1">
+                    Previous
+                </button>
+                <span class="text-danger span-page-text">Page {{currentPage()}} of {{this.usersHopeArea.dataList().totalPages}}</span>
+                <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.usersHopeArea.dataList().totalPages">
+                    Next
+                </button>
+            </div>
 
-                    <div class="page-input-div">
-                        <span class="span-page-go">Page</span>
-                        <input class="go-page-input" type="number" [value]="pageInput()" (input)="updateInputPage($any($event.target).value)" min="1"/>
-                        <button class="btn-go-page btn-primary" (click)="getPage()" [disabled]="currentPage() === this.usersHopeAreaService.dataList().totalPages">
-                            Go
-                        </button>
-                    </div>
-
-                </div>
-
+            <div class="page-input-div">
+                <span class="span-page-go">Page</span>
+                <input class="go-page-input" type="number" [value]="pageInput()" (input)="updateInputPage($any($event.target).value)" min="1"/>
+                <button class="btn-go-page btn-primary" (click)="getPage()" [disabled]="currentPage() === this.usersHopeArea.dataList().totalPages">
+                    Go
+                </button>
             </div>
         </div>
     </div>

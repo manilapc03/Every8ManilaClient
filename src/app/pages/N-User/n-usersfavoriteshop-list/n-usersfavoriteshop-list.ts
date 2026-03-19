@@ -1,8 +1,10 @@
 import { Component, inject, signal, computed, input, model, effect, OnInit } from '@angular/core';
-import { NUsersFavoriteShopServiceAPI } from '../../../services/N-UsersFavoriteShop/n-usersfavoriteshop-service.api';
+import { NUsersFavoriteShopServiceAPI } from '../../../services/N-UsersFavoriteShop/n-usersfavoriteshop-service-api';
 import { ResponseData } from '../../../shared/response-data';
 import { NUsersFavoriteShopModel } from '../../../model/N-UsersFavoriteShop/n-usersfavoriteshop.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/Auth/auth-service';
 
 @Component({
     selector: 'app-n-usersfavoriteshop-list',
@@ -12,7 +14,27 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 })
 export class NUsersFavoriteShopList implements OnInit {
 
-    usersFavoriteShopService = inject(NUsersFavoriteShopServiceAPI);
+    //this.authService.refreshToken();    
+
+    showTables = true;
+    router = inject(Router);
+
+    authService = inject(AuthService);
+    usersFavoriteShop = inject(NUsersFavoriteShopServiceAPI);
+
+    // 1. Add the new Signals
+    uidInput = signal<string>("");
+    shop_idInput = signal<string>("");
+
+    // 2. Add the update methods called by your HTML (input) events
+    updateUid(value: string) { this.uidInput.set(value); }
+    updateShop_id(value: string) { this.shop_idInput.set(value); }
+
+    // 3. Update the filter handler
+    filterHandler() {
+        this.currentPage.set(1);
+        this.updatePage();
+    }
 
     selectedPagesize = model<string | null>("10");
     pageInput = model<number>(1);
@@ -20,17 +42,11 @@ export class NUsersFavoriteShopList implements OnInit {
     pageSize = signal<number>(10);;
     currentPage = signal<number>(1);
 
-    pageDataList = computed(() => {
-        //console.log(this.userService.dataList().data);
-        return this.usersFavoriteShopService.dataList().data
-    });
-
     pageData = computed(() => {
-        //console.log(this.userService.data().data);
-        return this.usersFavoriteShopService.data().data
+        return this.usersFavoriteShop.dataList().data
     });
 
-    onChange(event: Event) {
+    onChangePagesize(event: Event) {
         const value = (event.target as HTMLSelectElement).value;
         this.selectedPagesize.set(value);
 
@@ -50,7 +66,7 @@ export class NUsersFavoriteShopList implements OnInit {
     }
 
     gotoPage(page: number): void {
-        if (page < 1 || page > this.usersFavoriteShopService.dataList().totalPages) {
+        if (page < 1 || page > this.usersFavoriteShop.dataList().totalPages) {
             return;
         }
         this.currentPage.set(page);
@@ -59,27 +75,26 @@ export class NUsersFavoriteShopList implements OnInit {
 
     updatePage() {
         try {
-            this.usersFavoriteShopService.getUsersFavoriteShopList(this.currentPage(), this.pageSize()).unsubscribe();
-            this.usersFavoriteShopService.getUsersFavoriteShopList(this.currentPage(), this.pageSize());
-
-            //this.totalPage.set(this.userService.dataList().totalPages);
+            // Pass the 4 new signal values into the service!
+            this.usersFavoriteShop.getUsersFavoriteShopList(
+                this.currentPage(),
+                this.pageSize(),
+                this.uidInput(),
+                this.shop_idInput()
+            );
         } catch (error) {
             // Code to handle the error
-        } finally {
-            //
-            //alert("updatePage()");
         }
-
     }
 
     ngOnInit() {
         this.currentPage.set(1);
-        this.usersFavoriteShopService.getUsersFavoriteShopList(this.currentPage(), this.pageSize());
+        // this.usersFavoriteShop.accessCountList(this.currentPage(), this.pageSize());
         this.updatePage();
     }
 
     nextPage() {
-        if (this.currentPage() < this.usersFavoriteShopService.dataList().totalPages) {
+        if (this.currentPage() < this.usersFavoriteShop.dataList().totalPages) {
             this.currentPage.update(currentValue => currentValue + 1);
 
             this.updatePage();
@@ -87,7 +102,7 @@ export class NUsersFavoriteShopList implements OnInit {
     }
 
     prevPage() {
-        if (this.currentPage() > 1) {
+        if ((this.currentPage() > 1) && (this.usersFavoriteShop.dataList().totalPages > 0)) {
             this.currentPage.update(currentValue => currentValue - 1);
             this.updatePage();
         }
@@ -98,32 +113,15 @@ export class NUsersFavoriteShopList implements OnInit {
 
     }
 
-    editHandler(id: number) {
-        //alert("editHandler:"+id);
-
-        this.usersFavoriteShopService.getUsersFavoriteShopById(id).unsubscribe();
-        this.usersFavoriteShopService.getUsersFavoriteShopById(id);
-
-
+    editHandler(id: string) {
+        alert("editHandler:" + id);
         //this.router.navigate(['/editemployee', id]);
     }
 
-    deleteHandler(id: number) {
-        //alert("deleteHandler:"+id);
-
-        if (confirm('Are you sure to delete this User?')) {
-
-            // this.userService.deleteEmployee(id).subscribe(() => {
-            //   // Refresh the list after deletion
-            //   this.api.GetallEmployee().subscribe(items => {
-            //     this.emplist.set(items);
-            //   });
-            // });
-
-        }
-
+    deleteHandler(id: string) {
+        // if (confirm('Are you sure to delete this AccessCount?')) {
+        //     this.usersFavoriteShop.deleteAccessCountById(id);
+        //     this.updatePage();
+        // }
     }
-
-
-
 }

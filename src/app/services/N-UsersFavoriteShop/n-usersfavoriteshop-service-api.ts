@@ -1,8 +1,8 @@
 import { map, Observable, take, tap, delay } from 'rxjs';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Injectable, inject, signal, computed, WritableSignal } from '@angular/core';
-import { NUsersLogClient } from './n-userslog-client';
-import { NUsersLogModel } from '../../model/N-UsersLog/n-userslog.model';
+import { NUsersFavoriteShopClient } from './n-usersfavoriteshop-client';
+import { NUsersFavoriteShopModel } from '../../model/N-UsersFavoriteShop/n-usersfavoriteshop.model';
 import { ResponseData } from '../../shared/response-data';
 //import { PaginationParameters } from '../../shared/Pagination/pagination-parameters';
 
@@ -10,10 +10,10 @@ import { ResponseData } from '../../shared/response-data';
 @Injectable({
     providedIn: 'root',
 })
-export class NUsersLogServiceAPI {
-    usersLogClient = inject(NUsersLogClient);
+export class NUsersFavoriteShopServiceAPI {
+    usersFavoriteShopClient = inject(NUsersFavoriteShopClient);
 
-    dataList = signal<ResponseData<NUsersLogModel>>({
+    dataList = signal<ResponseData<NUsersFavoriteShopModel>>({
         data: [],
         currentPage: 0,
         hasNext: false,
@@ -25,7 +25,7 @@ export class NUsersLogServiceAPI {
         totalPages: 0,
     });
 
-    data = signal<ResponseData<NUsersLogModel>>({
+    data = signal<ResponseData<NUsersFavoriteShopModel>>({
         data: [],
         currentPage: 0,
         hasNext: false,
@@ -37,10 +37,10 @@ export class NUsersLogServiceAPI {
         totalPages: 0,
     });
 
-    public getUsersLogList(pageNumber: number, pageSize: number, uid: string | null, shop_id: string | null) {
-        return this.usersLogClient.getUsersLogList(pageNumber, pageSize, uid, shop_id)
+    public getUsersFavoriteShopList(pageNumber: number, pageSize: number, uid: string | null, shop_id: string | null) {
+        return this.usersFavoriteShopClient.getUsersFavoriteShopList(pageNumber, pageSize, uid, shop_id)
             .subscribe({
-                next: (resp: ResponseData<NUsersLogModel>) => {
+                next: (resp: ResponseData<NUsersFavoriteShopModel>) => {
                     this.dataList.set(resp);
                 },
                 error: (err) => console.log(err.error),
@@ -48,11 +48,11 @@ export class NUsersLogServiceAPI {
             });
     }
 
-    public getUsersLogById(id: number) {
-        return this.usersLogClient.getUsersLogById(id)
+    public getUsersFavoriteShopById(id: number) {
+        return this.usersFavoriteShopClient.getUsersFavoriteShopById(id)
             //.pipe(delay(1000))
             .subscribe({
-                next: (resp: ResponseData<NUsersLogModel>) => {
+                next: (resp: ResponseData<NUsersFavoriteShopModel>) => {
                     this.data.set(resp);
                 },
                 error: (err) => console.log(err.error),
@@ -60,28 +60,28 @@ export class NUsersLogServiceAPI {
             });
     }
 
-    public deleteUsersLogById(id: number) {
-        this.usersLogClient.deleteUsersLogById(id)
+    public deleteUsersFavoriteShopById(id: number) {
+        this.usersFavoriteShopClient.deleteUsersFavoriteShopById(id)
             .subscribe({
                 error: (err) => alert("Unabled to delete record with id " + id.toString() + ":" + err.error),
                 complete: () => alert(id.toString() + " has been deleted."),
             });
     }
 
-    public createUsersLog(model: NUsersLogModel) {
-        this.usersLogClient.createUsersLog(model)
+    public createUsersFavoriteShop(model: NUsersFavoriteShopModel) {
+        this.usersFavoriteShopClient.createUsersFavoriteShop(model)
             .subscribe({
                 error: (err) => alert("Unabled to save record : " + err.error),
-                complete: () => alert(" UsersLog has been created."),
+                complete: () => alert(" UsersFavoriteShop has been created."),
             });
 
     }
 
-    public updateUsersLog(model: NUsersLogModel) {
-        this.usersLogClient.updateUsersLog(model)
+    public updateUsersFavoriteShop(model: NUsersFavoriteShopModel) {
+        this.usersFavoriteShopClient.updateUsersFavoriteShop(model)
             .subscribe({
                 error: (err) => alert("Unabled to save record : " + err.error),
-                complete: () => alert(" UsersLog has been updated."),
+                complete: () => alert(" UsersFavoriteShop has been updated."),
             });
 
     }

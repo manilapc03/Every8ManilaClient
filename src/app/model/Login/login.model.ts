@@ -6,7 +6,6 @@ export interface LoginModel {
     password: string;        
 }
 
-// Model factory for account form
 export const initialLoginData : LoginModel = {
     username: '',
     password: ''

@@ -2,7 +2,7 @@ import { map, Observable, take, tap, delay } from 'rxjs';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Injectable, inject, signal, computed, WritableSignal } from '@angular/core';
 import { NUserClient } from './n-user-client';
-import { NUsersModel } from '../../model/N-User/n-users.model';
+import { NUsersModel, initialNUsersData } from '../../model/N-User/n-users.model';
 import { ResponseData } from '../../shared/response-data';
 //import { PaginationParameters } from '../../shared/Pagination/pagination-parameters';
 
@@ -26,13 +26,13 @@ export class NUserServiceAPI {
     });
 
     data = signal<ResponseData<NUsersModel>>({
-      data: [],
+      data: [initialNUsersData],
       currentPage: 0,
       hasNext : false,
       hasPrevious: false,
       message: "",
       status: "",
-      pageSize: 10,
+      pageSize: 1,
       totalCount: 0,
       totalPages: 0,
     });
@@ -50,9 +50,10 @@ export class NUserServiceAPI {
             }); 
     }
 
-    public getUserById(id: number) {
+    public getUserById(id: number) //: Observable<ResponseData<NUsersModel>>
+    {
        return this.userClient.getUserById(id)
-            //.pipe(delay(1000))
+            .pipe(delay(1000))
             .subscribe({
                 next: (resp: ResponseData<NUsersModel>) => {
                         this.data.set(resp);
@@ -60,6 +61,7 @@ export class NUserServiceAPI {
                 error: (err) => console.log(err.error),
                 complete: () => console.log('Done.'),
             }); 
+      //return this.data;
     }
 
     public deleteUserById(id: number) {

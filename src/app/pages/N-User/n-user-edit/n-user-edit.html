@@ -1,0 +1,53 @@
+<div class="container-main">
+    <div class="card main-content-body">
+        <div class="card-header filter-card">
+            <h2 class="table-title">{{title()}}</h2>
+
+        </div>
+        <div class="card-body table-card">
+            <form (submit)="handleSave($event)" autocomplete="on">
+                <label for="uid">UID:</label>
+                <input type="number" id="uid" [formField]="nUserForm.uid" [readOnly]> 
+
+                <label for="userName">User Name:</label>
+                <input type="text" id="userName" [formField]="nUserForm.uname" placeholder="User Name"> 
+                @if(nUserForm.uname().touched() && nUserForm.uname().invalid()) {
+                    <ul class="errormessage">
+                        @for(error of nUserForm.uname().errors();track error) {
+                            <li>{{error.message}}</li>
+                        }
+                    </ul>
+                }
+                <label for="email">Email:</label>
+                <input type="text" id="email" [formField]="nUserForm.email" placeholder="email address"> 
+                @if(nUserForm.email().touched() && nUserForm.email().invalid()) {
+                    <ul class="errormessage">
+                        @for(error of nUserForm.email().errors();track error) {
+                            <li>{{error.message}}</li>
+                        }
+                    </ul>
+                }
+                <label for="pass">Password:</label>
+                <input type="password" id="pass" [formField]="nUserForm.pass" placeholder="password"> 
+                @if(nUserForm.pass().touched() && nUserForm.pass().invalid()) {
+                    <ul class="errormessage">
+                        @for(error of nUserForm.pass().errors();track error) {
+                            <li>{{error.message}}</li>
+                        }
+                    </ul>
+                }
+                <label for="address">Address:</label>
+                <input type="text" id="address" [formField]="nUserForm.address" placeholder="address"> 
+                @if(nUserForm.address().touched() && nUserForm.address().invalid()) {
+                    <ul class="errormessage">
+                        @for(error of nUserForm.address().errors();track error) {
+                            <li>{{error.message}}</li>
+                        }
+                    </ul>
+                }
+
+            </form>
+        </div>
+    </div>
+</div>
+

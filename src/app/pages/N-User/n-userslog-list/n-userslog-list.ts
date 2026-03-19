@@ -3,6 +3,8 @@ import { NUsersLogServiceAPI } from '../../../services/N-UsersLog/n-userslog-ser
 import { ResponseData } from '../../../shared/response-data';
 import { NUsersLogModel } from '../../../model/N-UsersLog/n-userslog.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/Auth/auth-service';
 
 @Component({
     selector: 'app-n-userslog-list',
@@ -12,7 +14,27 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 })
 export class NUsersLogList implements OnInit {
 
-    usersLogService = inject(NUsersLogServiceAPI);
+    //this.authService.refreshToken();    
+
+    showTables = true;
+    router = inject(Router);
+
+    authService = inject(AuthService);
+    usersLog = inject(NUsersLogServiceAPI);
+
+    // 1. Add the new Signals
+    create_dateInput = signal<string>("");
+    chihou_idInput = signal<string>("");
+
+    // 2. Add the update methods called by your HTML (input) events
+    updateCreate_date(value: string) { this.create_dateInput.set(value); }
+    updateChihou_id(value: string) { this.chihou_idInput.set(value); }
+
+    // 3. Update the filter handler
+    filterHandler() {
+        this.currentPage.set(1);
+        this.updatePage();
+    }
 
     selectedPagesize = model<string | null>("10");
     pageInput = model<number>(1);
@@ -20,17 +42,11 @@ export class NUsersLogList implements OnInit {
     pageSize = signal<number>(10);;
     currentPage = signal<number>(1);
 
-    pageDataList = computed(() => {
-        //console.log(this.userService.dataList().data);
-        return this.usersLogService.dataList().data
-    });
-
     pageData = computed(() => {
-        //console.log(this.userService.data().data);
-        return this.usersLogService.data().data
+        return this.usersLog.dataList().data
     });
 
-    onChange(event: Event) {
+    onChangePagesize(event: Event) {
         const value = (event.target as HTMLSelectElement).value;
         this.selectedPagesize.set(value);
 
@@ -50,7 +66,7 @@ export class NUsersLogList implements OnInit {
     }
 
     gotoPage(page: number): void {
-        if (page < 1 || page > this.usersLogService.dataList().totalPages) {
+        if (page < 1 || page > this.usersLog.dataList().totalPages) {
             return;
         }
         this.currentPage.set(page);
@@ -59,27 +75,26 @@ export class NUsersLogList implements OnInit {
 
     updatePage() {
         try {
-            this.usersLogService.getUsersLogList(this.currentPage(), this.pageSize()).unsubscribe();
-            this.usersLogService.getUsersLogList(this.currentPage(), this.pageSize());
-
-            //this.totalPage.set(this.userService.dataList().totalPages);
+            // Pass the new signal values into the service!
+            this.usersLog.getUsersLogList(
+                this.currentPage(),
+                this.pageSize(),
+                this.create_dateInput(),
+                this.chihou_idInput()
+            );
         } catch (error) {
             // Code to handle the error
-        } finally {
-            //
-            //alert("updatePage()");
         }
-
     }
 
     ngOnInit() {
         this.currentPage.set(1);
-        this.usersLogService.getUsersLogList(this.currentPage(), this.pageSize());
+        // this.usersLog.accessCountList(this.currentPage(), this.pageSize());
         this.updatePage();
     }
 
     nextPage() {
-        if (this.currentPage() < this.usersLogService.dataList().totalPages) {
+        if (this.currentPage() < this.usersLog.dataList().totalPages) {
             this.currentPage.update(currentValue => currentValue + 1);
 
             this.updatePage();
@@ -87,7 +102,7 @@ export class NUsersLogList implements OnInit {
     }
 
     prevPage() {
-        if (this.currentPage() > 1) {
+        if ((this.currentPage() > 1) && (this.usersLog.dataList().totalPages > 0)) {
             this.currentPage.update(currentValue => currentValue - 1);
             this.updatePage();
         }
@@ -98,32 +113,15 @@ export class NUsersLogList implements OnInit {
 
     }
 
-    editHandler(id: number) {
-        //alert("editHandler:"+id);
-
-        this.usersLogService.getUsersLogById(id).unsubscribe();
-        this.usersLogService.getUsersLogById(id);
-
-
+    editHandler(id: string) {
+        alert("editHandler:" + id);
         //this.router.navigate(['/editemployee', id]);
     }
 
-    deleteHandler(id: number) {
-        //alert("deleteHandler:"+id);
-
-        if (confirm('Are you sure to delete this User?')) {
-
-            // this.userService.deleteEmployee(id).subscribe(() => {
-            //   // Refresh the list after deletion
-            //   this.api.GetallEmployee().subscribe(items => {
-            //     this.emplist.set(items);
-            //   });
-            // });
-
-        }
-
+    deleteHandler(id: string) {
+        // if (confirm('Are you sure to delete this AccessCount?')) {
+        //     this.usersLog.deleteAccessCountById(id);
+        //     this.updatePage();
+        // }
     }
-
-
-
 }

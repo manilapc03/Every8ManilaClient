@@ -98,9 +98,11 @@ body {
 
 /* MAIN AREA */
 .main-area {
-    flex: 1;
+    /* flex: 1; */
+    width: 100%;
     display: flex;
     flex-direction: column;
+    /* overflow: hidden; */
 }
 
 /* TOP NAVBAR */
@@ -154,10 +156,22 @@ body {
 
 /* MAIN CONTENT */
 .main-content {
-    flex: 1;
-    background: #adcbd719;
-    /* padding: 30px; */
-    padding-top: 20px;
-    overflow-y: auto;
-    /* Added this so your main content scrolls if the table is too long */
+    width: 100%;
+    display: flex;
+    /* flex: 1; */
+    justify-content: center;
+    /* padding: 20px;
+    overflow-y: auto; */
 }
+
+.sample-content {
+    width: 100%;
+
+}
+
+/* .router-div {
+    display: flex;
+    margin: 0;
+    padding: 20px;
+    width: 1000px;
+} */

@@ -11,7 +11,7 @@ import { ResponseData } from '../../shared/response-data';
     providedIn: 'root',
 })
 export class NUsersHopeAreaServiceAPI {
-    userHopeAreaClient = inject(NUsersHopeAreaClient);
+    usersHopeAreaClient = inject(NUsersHopeAreaClient);
 
     dataList = signal<ResponseData<NUsersHopeAreaModel>>({
         data: [],
@@ -37,9 +37,8 @@ export class NUsersHopeAreaServiceAPI {
         totalPages: 0,
     });
 
-    public getUsersHopeAreaList(pageNumber: number, pageSize: number) {
-        return this.userHopeAreaClient.getUsersHopeAreaList(pageNumber, pageSize)
-            //.pipe(delay(1000))
+    public getUsersHopeAreaList(pageNumber: number, pageSize: number, uid: string | null, shop_id: string | null) {
+        return this.usersHopeAreaClient.getUsersHopeAreaList(pageNumber, pageSize, uid, shop_id)
             .subscribe({
                 next: (resp: ResponseData<NUsersHopeAreaModel>) => {
                     this.dataList.set(resp);
@@ -50,7 +49,7 @@ export class NUsersHopeAreaServiceAPI {
     }
 
     public getUsersHopeAreaById(id: number) {
-        return this.userHopeAreaClient.getUsersHopeAreaById(id)
+        return this.usersHopeAreaClient.getUsersHopeAreaById(id)
             //.pipe(delay(1000))
             .subscribe({
                 next: (resp: ResponseData<NUsersHopeAreaModel>) => {
@@ -60,5 +59,32 @@ export class NUsersHopeAreaServiceAPI {
                 complete: () => console.log('Done.'),
             });
     }
+
+    public deleteUsersHopeAreaById(id: number) {
+        this.usersHopeAreaClient.deleteUsersHopeAreaById(id)
+            .subscribe({
+                error: (err) => alert("Unabled to delete record with id " + id.toString() + ":" + err.error),
+                complete: () => alert(id.toString() + " has been deleted."),
+            });
+    }
+
+    public createUsersHopeArea(model: NUsersHopeAreaModel) {
+        this.usersHopeAreaClient.createUsersHopeArea(model)
+            .subscribe({
+                error: (err) => alert("Unabled to save record : " + err.error),
+                complete: () => alert(" UsersHopeArea has been created."),
+            });
+
+    }
+
+    public updateUsersHopeArea(model: NUsersHopeAreaModel) {
+        this.usersHopeAreaClient.updateUsersHopeArea(model)
+            .subscribe({
+                error: (err) => alert("Unabled to save record : " + err.error),
+                complete: () => alert(" UsersHopeArea has been updated."),
+            });
+
+    }
+
 
 }

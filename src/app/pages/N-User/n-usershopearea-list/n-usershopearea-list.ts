@@ -3,6 +3,8 @@ import { NUsersHopeAreaServiceAPI } from '../../../services/N-UsersHopeArea/n-us
 import { ResponseData } from '../../../shared/response-data';
 import { NUsersHopeAreaModel } from '../../../model/N-UsersHopeArea/n-usershopearea.model';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/Auth/auth-service';
 
 @Component({
     selector: 'app-n-usershopearea-list',
@@ -12,7 +14,27 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 })
 export class NUsersHopeAreaList implements OnInit {
 
-    usersHopeAreaService = inject(NUsersHopeAreaServiceAPI);
+    //this.authService.refreshToken();    
+
+    showTables = true;
+    router = inject(Router);
+
+    authService = inject(AuthService);
+    usersHopeArea = inject(NUsersHopeAreaServiceAPI);
+
+    // 1. Add the new Signals
+    uidInput = signal<string>("");
+    area_idInput = signal<string>("");
+
+    // 2. Add the update methods called by your HTML (input) events
+    updateUid(value: string) { this.uidInput.set(value); }
+    updateArea_id(value: string) { this.area_idInput.set(value); }
+
+    // 3. Update the filter handler
+    filterHandler() {
+        this.currentPage.set(1);
+        this.updatePage();
+    }
 
     selectedPagesize = model<string | null>("10");
     pageInput = model<number>(1);
@@ -20,17 +42,11 @@ export class NUsersHopeAreaList implements OnInit {
     pageSize = signal<number>(10);;
     currentPage = signal<number>(1);
 
-    pageDataList = computed(() => {
-        //console.log(this.userService.dataList().data);
-        return this.usersHopeAreaService.dataList().data
-    });
-
     pageData = computed(() => {
-        //console.log(this.userService.data().data);
-        return this.usersHopeAreaService.data().data
+        return this.usersHopeArea.dataList().data
     });
 
-    onChange(event: Event) {
+    onChangePagesize(event: Event) {
         const value = (event.target as HTMLSelectElement).value;
         this.selectedPagesize.set(value);
 
@@ -50,7 +66,7 @@ export class NUsersHopeAreaList implements OnInit {
     }
 
     gotoPage(page: number): void {
-        if (page < 1 || page > this.usersHopeAreaService.dataList().totalPages) {
+        if (page < 1 || page > this.usersHopeArea.dataList().totalPages) {
             return;
         }
         this.currentPage.set(page);
@@ -59,27 +75,26 @@ export class NUsersHopeAreaList implements OnInit {
 
     updatePage() {
         try {
-            this.usersHopeAreaService.getUsersHopeAreaList(this.currentPage(), this.pageSize()).unsubscribe();
-            this.usersHopeAreaService.getUsersHopeAreaList(this.currentPage(), this.pageSize());
-
-            //this.totalPage.set(this.userService.dataList().totalPages);
+            // Pass the new signal values into the service!
+            this.usersHopeArea.getUsersHopeAreaList(
+                this.currentPage(),
+                this.pageSize(),
+                this.uidInput(),
+                this.area_idInput()
+            );
         } catch (error) {
             // Code to handle the error
-        } finally {
-            //
-            //alert("updatePage()");
         }
-
     }
 
     ngOnInit() {
         this.currentPage.set(1);
-        this.usersHopeAreaService.getUsersHopeAreaList(this.currentPage(), this.pageSize());
+        // this.usersHopeArea.accessCountList(this.currentPage(), this.pageSize());
         this.updatePage();
     }
 
     nextPage() {
-        if (this.currentPage() < this.usersHopeAreaService.dataList().totalPages) {
+        if (this.currentPage() < this.usersHopeArea.dataList().totalPages) {
             this.currentPage.update(currentValue => currentValue + 1);
 
             this.updatePage();
@@ -87,7 +102,7 @@ export class NUsersHopeAreaList implements OnInit {
     }
 
     prevPage() {
-        if (this.currentPage() > 1) {
+        if ((this.currentPage() > 1) && (this.usersHopeArea.dataList().totalPages > 0)) {
             this.currentPage.update(currentValue => currentValue - 1);
             this.updatePage();
         }
@@ -98,32 +113,15 @@ export class NUsersHopeAreaList implements OnInit {
 
     }
 
-    editHandler(id: number) {
-        //alert("editHandler:"+id);
-
-        this.usersHopeAreaService.getUsersHopeAreaById(id).unsubscribe();
-        this.usersHopeAreaService.getUsersHopeAreaById(id);
-
-
+    editHandler(id: string) {
+        alert("editHandler:" + id);
         //this.router.navigate(['/editemployee', id]);
     }
 
-    deleteHandler(id: number) {
-        //alert("deleteHandler:"+id);
-
-        if (confirm('Are you sure to delete this User?')) {
-
-            // this.userService.deleteEmployee(id).subscribe(() => {
-            //   // Refresh the list after deletion
-            //   this.api.GetallEmployee().subscribe(items => {
-            //     this.emplist.set(items);
-            //   });
-            // });
-
-        }
-
+    deleteHandler(id: string) {
+        // if (confirm('Are you sure to delete this AccessCount?')) {
+        //     this.usersHopeArea.deleteAccessCountById(id);
+        //     this.updatePage();
+        // }
     }
-
-
-
 }

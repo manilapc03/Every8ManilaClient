@@ -1,15 +1,15 @@
 <div class="container-main">
     <div class="card main-content-body">
         <div class="card-header filter-card">
-            <h1 class="table-title">N-User</h1>
+            <h1 class="table-title">N-UsersLoginHistory</h1>
             <div class="func-wrapper">
                 <button class="add-button btn-primary" (click)="addHandler()">Add</button> 
                 <div class="filter-wrapper">
                     <select class="dd-filter-1" [value]="selectedSearchBy()" (change)="onChangeSearchBy($event)">
                         <option value="" selected disabled></option>
-                        <option value="uid">id</option>
-                        <option value="email">email</option>
-                        <option value="username">username</option>
+                        <option value="tran_no">tran_no</option>
+                        <option value="uid">uid</option>
+                        <option value="chihou_id">chihou_id</option>
                     </select>
                     <input class="filter-input" type="text" [value]="searchInput()" (input)="updateInputSearch($any($event.target).value)" />
                     <button class="filter-btn" (click)="filterHandler()">Search</button>
@@ -21,29 +21,37 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">UID</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">UName</th>
-                            <th scope="col">Chihou</th>
+                            <th scope="col">tran_no</th>
+                            <th scope="col">uid</th>
+                            <th scope="col">chihou_id</th>
                             <th scope="col">Provider</th>
-                            <th scope="col">Last login</th>
+                            <!-- <th scope="col">AccessToken</th>
+                            <th scope="col">RefreshToken</th> -->
+                            <th scope="col">RefreshTokenExpiryTime</th>
+                            <th scope="col">HostName</th>
+                            <th scope="col">IPAddress</th>
+                            <th scope="col">create_date</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @for (item of this.pageDataList(); track item.uid) {
+                        @for (item of this.pageDataList(); track item.tran_no) {
                         <tr>
+                            <td>{{item.tran_no}}</td>
                             <td>{{item.uid}}</td>
-                            <td style="text-align:left">{{item.email}}</td>
-                            <td style="text-align:left">{{item.uname}}</td>
                             <td>{{item.chihou_id}}</td>
-                            <td style="text-align:left">{{item.provider}}</td>
-                            <td style="text-align:left">{{item.last_login}}</td>
+                            <td>{{item.provider}}</td>
+                            <!-- <td>{{item.accessToken}}</td>
+                            <td>{{item.refreshToken}}</td> -->
+                            <td>{{item.refreshTokenExpiryTime}}</td>
+                            <td>{{item.hostName}}</td>
+                            <td>{{item.iPAddress}}</td>
+                            <td>{{item.create_date}}</td>
                             <td>
                                 <div class="btn-container cmd-btn">
-                                    <button class="edit-btn" (click)="editHandler(item.uid)">Edit</button>
-                                    <button class="del-btn" (click)="deleteHandler(item.uid)">Delete</button>
+                                    <button class="edit-btn" (click)="editHandler(item.tran_no)">View</button>
+                                    <button class="del-btn" (click)="deleteHandler(item.tran_no)">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -69,8 +77,8 @@
                 <button class="btn-page btn-primary" (click)="prevPage()" [disabled]="currentPage() === 1">
                     Previous
                 </button>
-                <span class="text-danger span-page-text">Page {{currentPage()}} of {{this.userService.dataList().totalPages}}</span>
-                <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.userService.dataList().totalPages">
+                <span class="text-danger span-page-text">Page {{currentPage()}} of {{this.usersLoginHistoryService.dataList().totalPages}}</span>
+                <button class="btn-page btn-primary" (click)="nextPage()" [disabled]="currentPage() === this.usersLoginHistoryService.dataList().totalPages">
                     Next
                 </button>
             </div>
@@ -78,7 +86,7 @@
             <div class="page-input-div">
                 <span class="span-page-go">Page</span>
                 <input class="go-page-input" type="number" [value]="pageInput()" (input)="updateInputPage($any($event.target).value)" min="1" />
-                <button class="btn-go-page btn-primary" (click)="getPage()" [disabled]="currentPage() === this.userService.dataList().totalPages">
+                <button class="btn-go-page btn-primary" (click)="getPage()" [disabled]="currentPage() === this.usersLoginHistoryService.dataList().totalPages">
                     Go
                 </button>
             </div>

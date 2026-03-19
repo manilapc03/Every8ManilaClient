@@ -18,10 +18,10 @@ export class NUserList implements OnInit {
   //this.authService.refreshToken();    
 
   showTables = true;
-  router = inject(Router);
+  private router = inject(Router);
 
-  authService = inject(AuthService);
-  userService = inject(NUserServiceAPI);
+  private authService = inject(AuthService);
+  private userService = inject(NUserServiceAPI);
 
   selectedSearchBy = model<string | null>("username");
   onChangeSearchBy(event: Event) {
@@ -100,6 +100,8 @@ export class NUserList implements OnInit {
   }
 
   ngOnInit() {
+
+    //alert("NUserList - ngOnInit()");
     this.currentPage.set(1);
     //this.userService.getUserList(this.currentPage(), this.pageSize());
     this.updatePage();
@@ -128,11 +130,11 @@ export class NUserList implements OnInit {
   editHandler(id: number) {
     //alert("editHandler:"+id);
 
-    this.userService.getUserById(id).unsubscribe();
-    this.userService.getUserById(id);
+    // this.userService.getUserById(id).unsubscribe();
+    // this.userService.getUserById(id);
 
 
-    //this.router.navigate(['/editemployee', id]);
+    this.router.navigate(['/useredit', id]);
   }
 
   deleteHandler(id: number) {

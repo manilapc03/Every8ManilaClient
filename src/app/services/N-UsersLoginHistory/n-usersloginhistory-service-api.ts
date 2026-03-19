@@ -1,8 +1,8 @@
 import { map, Observable, take, tap, delay } from 'rxjs';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Injectable, inject, signal, computed, WritableSignal } from '@angular/core';
-import { NUsersLogClient } from './n-userslog-client';
-import { NUsersLogModel } from '../../model/N-UsersLog/n-userslog.model';
+import { NUsersLoginHistoryClient } from './n-usersloginhistory-client';
+import { NUsersLoginHistoryModel } from '../../model/N-UsersLoginHistory/n-usersloginhistory.model';
 import { ResponseData } from '../../shared/response-data';
 //import { PaginationParameters } from '../../shared/Pagination/pagination-parameters';
 
@@ -10,10 +10,10 @@ import { ResponseData } from '../../shared/response-data';
 @Injectable({
     providedIn: 'root',
 })
-export class NUsersLogServiceAPI {
-    usersLogClient = inject(NUsersLogClient);
+export class NUsersLoginHistoryServiceAPI {
+    userClient = inject(NUsersLoginHistoryClient);
 
-    dataList = signal<ResponseData<NUsersLogModel>>({
+    dataList = signal<ResponseData<NUsersLoginHistoryModel>>({
         data: [],
         currentPage: 0,
         hasNext: false,
@@ -25,7 +25,7 @@ export class NUsersLogServiceAPI {
         totalPages: 0,
     });
 
-    data = signal<ResponseData<NUsersLogModel>>({
+    data = signal<ResponseData<NUsersLoginHistoryModel>>({
         data: [],
         currentPage: 0,
         hasNext: false,
@@ -37,10 +37,11 @@ export class NUsersLogServiceAPI {
         totalPages: 0,
     });
 
-    public getUsersLogList(pageNumber: number, pageSize: number, uid: string | null, shop_id: string | null) {
-        return this.usersLogClient.getUsersLogList(pageNumber, pageSize, uid, shop_id)
+    public getUserHistoryList(pageNumber: number, pageSize: number, searchby: string | null, keyword: string | null) {
+        return this.userClient.getUsersLoginHistoryList(pageNumber, pageSize, searchby, keyword)
+            //.pipe(delay(1000))
             .subscribe({
-                next: (resp: ResponseData<NUsersLogModel>) => {
+                next: (resp: ResponseData<NUsersLoginHistoryModel>) => {
                     this.dataList.set(resp);
                 },
                 error: (err) => console.log(err.error),
@@ -48,11 +49,11 @@ export class NUsersLogServiceAPI {
             });
     }
 
-    public getUsersLogById(id: number) {
-        return this.usersLogClient.getUsersLogById(id)
+    public getUsersLoginHistoryById(id: number) {
+        return this.userClient.getUsersLoginHistoryById(id)
             //.pipe(delay(1000))
             .subscribe({
-                next: (resp: ResponseData<NUsersLogModel>) => {
+                next: (resp: ResponseData<NUsersLoginHistoryModel>) => {
                     this.data.set(resp);
                 },
                 error: (err) => console.log(err.error),
@@ -60,28 +61,28 @@ export class NUsersLogServiceAPI {
             });
     }
 
-    public deleteUsersLogById(id: number) {
-        this.usersLogClient.deleteUsersLogById(id)
+    public deleteUsersLoginHistoryById(id: number) {
+        this.userClient.deleteUsersLoginHistoryById(id)
             .subscribe({
                 error: (err) => alert("Unabled to delete record with id " + id.toString() + ":" + err.error),
                 complete: () => alert(id.toString() + " has been deleted."),
             });
     }
 
-    public createUsersLog(model: NUsersLogModel) {
-        this.usersLogClient.createUsersLog(model)
+    public createUsersLoginHistory(model: NUsersLoginHistoryModel) {
+        this.userClient.createUsersLoginHistory(model)
             .subscribe({
                 error: (err) => alert("Unabled to save record : " + err.error),
-                complete: () => alert(" UsersLog has been created."),
+                complete: () => alert(" User has been created."),
             });
 
     }
 
-    public updateUsersLog(model: NUsersLogModel) {
-        this.usersLogClient.updateUsersLog(model)
+    public updateUsersLoginHistory(model: NUsersLoginHistoryModel) {
+        this.userClient.updateUsersLoginHistory(model)
             .subscribe({
                 error: (err) => alert("Unabled to save record : " + err.error),
-                complete: () => alert(" UsersLog has been updated."),
+                complete: () => alert(" User has been updated."),
             });
 
     }

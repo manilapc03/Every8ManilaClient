@@ -33,17 +33,20 @@ export class NUserClient {
     return this.http.get<ResponseData<NUsersModel>>(strURL, {params});
   }
 
+  // https://localhost:7215/api/N_Users/GetByIdUser/7
   public getUserById(id: number)
   {
     return this.http.get<ResponseData<NUsersModel>>(
-      environment.apiUrl+`/api/N_Users/GetByIdUser?id=${id}`
+      environment.apiUrl+`/api/N_Users/GetByIdUser/${id}`
     );
   }
 
+  // http://localhost:4200/useredit/5
+  // environment.apiUrl+`/api/N_Users/delete?id=${id}`
   public deleteUserById(id: number)
   {
     return this.http.delete(
-      environment.apiUrl+`/api/N_Users/delete?id=${id}`
+      environment.apiUrl+`/api/N_Users/delete/${id}`
     );
   }
 

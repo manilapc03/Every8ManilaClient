@@ -1,15 +1,16 @@
-.container {
-    padding-top: 10px;
-}
-
-.card-body {
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+.container-main {
+    display: flex;
+    width: 100%;
+    background-color: black;
+    min-height: 800px;
+    /* margin: 10px 0; */
+    /* justify-content: center; */
 }
 
 .table-title {
     text-align: center;
     color: #1A374D;
+    margin-top: 15px;
     margin-bottom: 25px;
 }
 
@@ -45,7 +46,7 @@ button {
 }
 
 .add-button {
-    min-width: 100px;
+    min-width: 150px;
     border-radius: 7px;
 }
 
@@ -53,7 +54,13 @@ button {
 /* ----- FILTER SECTION ----- */
 
 .func-wrapper {
-    display: flex;
+    margin: 0 40px;
+    padding-bottom: 20px;
+}
+
+.main-content-body {
+    width: 100%;
+    border-radius: 0;
 }
 
 .filter-wrapper {
@@ -94,7 +101,7 @@ button {
 }
 
 .filter-inputgroup input:focus~label,
-.filter-inputgroup input:valid~label {
+.filter-inputgroup input:not(:placeholder-shown)~label {
     top: 0;
     background-color: #F8F8F8;
     font-size: 11px;
@@ -145,23 +152,32 @@ button:hover {
 /* TABLE SECTION     */
 /* ----------------  */
 
+.table-card {
+    margin: 0;
+    padding: 0;
+    min-height: 630px;
+}
+
 .table-wrapper {
+    /* display: flex;
+    justify-content: center; */
+    margin: 0;
+    padding: 0;
+    /* width: 100%; */
+    /* max-width: 1566px; */
     width: 100%;
-    max-height: 590px;
+    max-width: 1678px;
+    max-height: 612px;
     overflow: auto;
-    border: 1px solid #ddd;
-    border-radius: 12px;
+    /* border: 1px solid #ddd; */
+    /* border-radius: 12px; */
 }
 
 table {
     width: 100%;
-    min-width: 1200px;
+    /* min-width: 1200px; */
     border-collapse: collapse;
-}
-
-td,
-th {
-    white-space: nowrap;
+    /* border-radius: 12px; */
 }
 
 thead th {
@@ -170,6 +186,7 @@ thead th {
     z-index: 3;
     background-color: #406882;
     margin: 0;
+    padding: 17.5px 0;
 }
 
 /* Scrollbar design */
@@ -197,11 +214,17 @@ thead th {
 
 th,
 td {
+    white-space: nowrap;
     color: #1A374D;
-    padding: 7.7px;
-    text-align: left;
+    /* padding: 7.7px; */
+    text-align: center;
     font-size: 13px;
     vertical-align: middle;
+}
+
+td {
+    border-right: solid 1px #DDDD;
+    padding: 7.7px;
 }
 
 th {
@@ -212,11 +235,11 @@ th {
 }
 
 th:first-child {
-    border-top-left-radius: 12px;
+    /* border-top-left-radius: 12px; */
 }
 
 th:last-child {
-    border-top-right-radius: 12px;
+    /* border-top-right-radius: 12px; */
 }
 
 tr:nth-child(even) td {
@@ -265,7 +288,7 @@ tr:nth-child(even) td {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 35px;
     gap: 30px;
 }
 

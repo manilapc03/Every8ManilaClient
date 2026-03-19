@@ -8,7 +8,7 @@ import { LoginPageComponent } from './pages/Login/login-page.component/login-pag
 //import { NUsersBlockShopList } from './pages/N-User/n-usersblockshop-list/n-usersblockshop-list';
 import { SharedNavbarComponent } from './pages/shared-pages/shared-navbar';
 
-
+//import { NUserAdd } from './pages/N-User/n-user-add/n-user-add'; 
 
 
 export const routes: Routes = [
@@ -31,6 +31,17 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/N-User/n-user-list/n-user-list').then(x => x.NUserList),
         canActivate: [authGuard]
       },
+      {
+        path: 'useredit/:id',
+        loadComponent: () => import('./pages/N-User/n-user-edit/n-user-edit').then(x => x.NUserEdit),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'useradd',
+        loadComponent: () => import('./pages/N-User/n-user-add/n-user-add').then(x => x.NUserAdd),
+        canActivate: [authGuard]
+      },
+
       {
         path: 'accesscountlist',
         loadComponent: () => import('./pages/N-AccessCount/n-accesscount-list/n-accesscount-list').then(x => x.NAccessCountList),
@@ -79,6 +90,11 @@ export const routes: Routes = [
       {
         path: 'usersloglist',
         loadComponent: () => import('./pages/N-User/n-userslog-list/n-userslog-list').then(x => x.NUsersLogList),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'usersloginhistorylist',
+        loadComponent: () => import('./pages/N-User/n-usersloginhistory-list/n-usersloginhistory-list').then(x => x.NUsersLoginHistoryList),
         canActivate: [authGuard]
       },
       // Add your other pages here
